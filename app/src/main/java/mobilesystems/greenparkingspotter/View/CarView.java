@@ -35,7 +35,6 @@ public class CarView extends Fragment {
         carBrand = view.findViewById(R.id.carBrand);
         carName = view.findViewById(R.id.carName);
         carHorsePower = view.findViewById(R.id.carHP);
-        carVM = new CarViewModel();
 
         return view;
     }
@@ -43,6 +42,8 @@ public class CarView extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        carVM = new ViewModelProvider(requireActivity()).get(CarViewModel.class);
 
         carVM.fetchCars().observe(requireActivity(), new Observer<List<ICar>>() {
             @Override
