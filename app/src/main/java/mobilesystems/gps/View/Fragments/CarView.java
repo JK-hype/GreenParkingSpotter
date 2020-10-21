@@ -1,4 +1,4 @@
-package mobilesystems.greenparkingspotter.View;
+package mobilesystems.gps.View.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,9 +15,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import java.util.List;
 
-import mobilesystems.greenparkingspotter.Acquaintance.ICar;
-import mobilesystems.greenparkingspotter.R;
-import mobilesystems.greenparkingspotter.ViewModel.CarViewModel;
+import mobilesystems.gps.Acquaintance.ICar;
+import mobilesystems.gps.ViewModel.CarViewModel;
+import mobilesystems.gps.R;
 
 public class CarView extends Fragment {
 
@@ -28,7 +28,7 @@ public class CarView extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.activity_main, container, false);
+        final View view = inflater.inflate(R.layout.car_view, container, false);
 
         btn_fetchCars = view.findViewById(R.id.btn_fetchCars);
         carAmount = view.findViewById(R.id.carAmount);

@@ -1,4 +1,4 @@
-package mobilesystems.greenparkingspotter;
+package mobilesystems.gps;
 
 import android.content.Context;
 

@@ -1,6 +1,6 @@
-package mobilesystems.greenparkingspotter.Model.DataObjects;
+package mobilesystems.gps.Model.DataObjects;
 
-import mobilesystems.greenparkingspotter.Acquaintance.ICar;
+import mobilesystems.gps.Acquaintance.ICar;
 
 public class Car implements ICar {
     private String brand;

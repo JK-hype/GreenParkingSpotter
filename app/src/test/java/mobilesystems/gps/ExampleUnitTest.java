@@ -1,4 +1,4 @@
-package mobilesystems.greenparkingspotter;
+package mobilesystems.gps;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package mobilesystems.greenparkingspotter.Acquaintance;
+package mobilesystems.gps.Acquaintance;
 
 public interface ICar {
     String getBrand();

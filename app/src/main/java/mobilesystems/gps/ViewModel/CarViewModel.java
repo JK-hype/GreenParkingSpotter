@@ -1,4 +1,4 @@
-package mobilesystems.greenparkingspotter.ViewModel;
+package mobilesystems.gps.ViewModel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-import mobilesystems.greenparkingspotter.Acquaintance.Callback;
-import mobilesystems.greenparkingspotter.Acquaintance.ICar;
-import mobilesystems.greenparkingspotter.Model.Repository.CarService;
+import mobilesystems.gps.Acquaintance.Callback;
+import mobilesystems.gps.Acquaintance.ICar;
+import mobilesystems.gps.Model.Repository.CarService;
 
 public class CarViewModel extends ViewModel {
     MutableLiveData<List<ICar>> carList;

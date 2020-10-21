@@ -1,7 +1,7 @@
-package mobilesystems.greenparkingspotter.Model.Repository;
+package mobilesystems.gps.Model.Repository;
 
-import mobilesystems.greenparkingspotter.Acquaintance.Callback;
-import mobilesystems.greenparkingspotter.Model.Adapters.CarAdapter;
+import mobilesystems.gps.Acquaintance.Callback;
+import mobilesystems.gps.Model.Adapters.CarAdapter;
 
 public class CarService {
     public void fetchCars(final Callback callback) {

@@ -1,9 +1,9 @@
-package mobilesystems.greenparkingspotter.Model.Adapters;
+package mobilesystems.gps.Model.Adapters;
 
 import java.util.ArrayList;
 
-import mobilesystems.greenparkingspotter.Acquaintance.ICar;
-import mobilesystems.greenparkingspotter.Model.DataObjects.Car;
+import mobilesystems.gps.Acquaintance.ICar;
+import mobilesystems.gps.Model.DataObjects.Car;
 
 public class CarAdapter {
     public ArrayList<ICar> convertCars(int amount, String brand, String name, String horsePower) {
