@@ -51,7 +51,6 @@ public class LoginView extends Fragment {
                     FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
 
                     fragmentTransaction.replace(R.id.mainFragment, parkingView);
-                    fragmentTransaction.addToBackStack("LoginView");
                     fragmentTransaction.commit();
                 }else{
                     Toast.makeText(getContext(),"Login failed.", Toast.LENGTH_SHORT).show();
