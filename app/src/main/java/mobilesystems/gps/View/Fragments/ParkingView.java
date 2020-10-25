@@ -5,15 +5,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import mobilesystems.gps.R;
 
 public class ParkingView extends Fragment {
     Button btn_park;
+    ImageView imageView_menu;
 
     @Nullable
     @Override
@@ -21,6 +25,7 @@ public class ParkingView extends Fragment {
         final View view = inflater.inflate(R.layout.parking_view, container, false);
 
         btn_park = view.findViewById(R.id.btn_park);
+        imageView_menu = view.findViewById(R.id.imageView_menu);
 
         return view;
     }
@@ -33,6 +38,18 @@ public class ParkingView extends Fragment {
             @Override
             public void onClick(View v) {
                 System.out.println("Test");
+            }
+        });
+
+        imageView_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MenuView menuView = new MenuView();
+                FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
+
+                fragmentTransaction.replace(R.id.mainFragment, menuView);
+                fragmentTransaction.addToBackStack("MenuView");
+                fragmentTransaction.commit();
             }
         });
     }
