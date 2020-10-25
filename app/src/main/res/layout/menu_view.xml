@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="mobilesystems.gps.View.Activities.MainActivity"
+    android:background="@android:color/holo_red_light">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_margin="10dp"
+            android:background=""
+            android:text="PARK"
+            android:textSize="50dp"
+            android:textColor="@android:color/white"
+            android:drawableLeft="@drawable/icon_home"
+            android:id="@+id/btn_park"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_margin="10dp"
+            android:background=""
+            android:text="MAP"
+            android:textSize="50dp"
+            android:textColor="@android:color/white"
+            android:drawableLeft="@drawable/icon_map"
+            android:id="@+id/btn_map"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_margin="10dp"
+            android:background=""
+            android:text="PERKS"
+            android:textSize="50dp"
+            android:textColor="@android:color/white"
+            android:drawableLeft="@drawable/icon_perks"
+            android:id="@+id/btn_perks"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_margin="10dp"
+            android:background=""
+            android:text="ACCOUNT"
+            android:textSize="50dp"
+            android:textColor="@android:color/white"
+            android:drawableLeft="@drawable/icon_account"
+            android:id="@+id/btn_account"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_margin="5dp"
+            android:background=""
+            android:text="ABOUT"
+            android:textSize="50dp"
+            android:textColor="@android:color/white"
+            android:drawableLeft="@drawable/icon_info"
+            android:id="@+id/btn_about"/>
+    </LinearLayout>
+
+</RelativeLayout>
