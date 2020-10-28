@@ -21,7 +21,7 @@ import mobilesystems.gps.ViewModel.LoginViewModel;
 
 public class LoginView extends Fragment {
     Button btn_login, btn_goToCreateAccount;
-    EditText txt_username, txt_password;
+    EditText txt_studentMail, txt_password;
     LoginViewModel loginVM;
 
     @Nullable
@@ -31,7 +31,7 @@ public class LoginView extends Fragment {
 
         btn_login = view.findViewById(R.id.btn_login);
         btn_goToCreateAccount = view.findViewById(R.id.btn_goToCreateAccount);
-        txt_username = view.findViewById(R.id.txt_username);
+        txt_studentMail = view.findViewById(R.id.txt_studentMail);
         txt_password = view.findViewById(R.id.txt_password);
 
         return view;
@@ -46,14 +46,14 @@ public class LoginView extends Fragment {
         loginVM.loginStatus().observe(requireActivity(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean loginStatus) {
-                if(loginStatus){
+                if (loginStatus) {
                     ParkingView parkingView = new ParkingView();
                     FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
 
                     fragmentTransaction.replace(R.id.mainFragment, parkingView);
                     fragmentTransaction.commit();
-                }else{
-                    Toast.makeText(getContext(),"Login failed.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Login failed.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -62,16 +62,16 @@ public class LoginView extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String username = txt_username.getText().toString();
+                String mail = txt_studentMail.getText().toString();
                 String password = txt_password.getText().toString();
-                if(!username.isEmpty() && !password.isEmpty()){
-                    loginVM.login(username,password);
-                }else{
+                if (!mail.isEmpty() && !password.isEmpty()) {
+                    loginVM.login(mail, password);
+                } else {
                     Toast.makeText(getContext(), "You have not typed anything.", Toast.LENGTH_SHORT).show();
                 }
 
 
-        }
+            }
         });
 
         btn_goToCreateAccount.setOnClickListener(new View.OnClickListener() {

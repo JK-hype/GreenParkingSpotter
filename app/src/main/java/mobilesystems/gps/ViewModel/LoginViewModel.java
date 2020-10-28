@@ -21,12 +21,12 @@ public class LoginViewModel extends ViewModel {
         return loginStatus;
     }
 
-    public void login(String username, String password) {
+    public void login(String mail, String password) {
         loginService.login(new Callback() {
             @Override
             public void onResponse(Object o) {
                 loginStatus.postValue((boolean) o);
             }
-        },username,password);
+        },mail,password);
     }
 }

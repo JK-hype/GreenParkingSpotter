@@ -21,9 +21,9 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Username"
+            android:hint="Student mail"
             android:minWidth="200dp"
-            android:id="@+id/txt_username"/>
+            android:id="@+id/txt_studentMail"/>
 
         <EditText
             android:layout_width="wrap_content"

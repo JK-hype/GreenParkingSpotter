@@ -1,13 +1,28 @@
 package mobilesystems.gps.Model.Repository;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 import mobilesystems.gps.Acquaintance.Callback;
+import mobilesystems.gps.Acquaintance.SharedData;
 import mobilesystems.gps.Model.Adapters.CarAdapter;
 
 public class LoginService {
-    public void login(final Callback callback, String username, String password) {
-        if(username.equals("test") && password.equals("1234")) {
-            callback.onResponse(true);
-        }else{
+    public void login(final Callback callback, String mail, String password) {
+        try {
+            Connection db = SharedData.getDbConnection();
+            Statement st = db.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM users WHERE mail='" + mail + "' AND password='" + password + "';");
+            if (rs.getString(1) != null) {
+                rs.close();
+                st.close();
+                callback.onResponse(true);
+            } else {
+                callback.onResponse(false);
+            }
+        } catch (java.sql.SQLException e) {
+            System.out.println(e.getMessage());
             callback.onResponse(false);
         }
     }

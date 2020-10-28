@@ -21,13 +21,15 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/txt_createStudentMail"
             android:layout_gravity="center"
-            android:hint="Username"
+            android:hint="Student mail"
             android:minWidth="200dp" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/txt_createPassword"
             android:layout_gravity="center"
             android:hint="Password"
             android:minWidth="200dp" />
@@ -35,14 +37,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:hint="Email"
-            android:minWidth="200dp" />
-
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/txt_createCarType"
             android:layout_gravity="center"
             android:hint="Car type"
             android:minWidth="200dp" />
@@ -50,6 +45,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/txt_createCarBrand"
             android:layout_gravity="center"
             android:hint="Car brand"
             android:minWidth="200dp" />
