@@ -15,12 +15,12 @@ public class LoginService {
             Statement st = db.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM users WHERE mail='" + mail + "' AND password='" + password + "';");
             if (rs.getString(1) != null) {
-                rs.close();
-                st.close();
                 callback.onResponse(true);
             } else {
                 callback.onResponse(false);
             }
+            rs.close();
+            st.close();
         } catch (java.sql.SQLException e) {
             System.out.println(e.getMessage());
             callback.onResponse(false);

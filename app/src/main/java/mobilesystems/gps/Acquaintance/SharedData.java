@@ -4,7 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class SharedData {
-    private static String db_url = "jdbc:postgresql://hgtgbzti:WC5-4JEsrncWqCWa16P8uUOwdPlx5zJN@hattie.db.elephantsql.com:5432/hgtgbzti";
+    //private static String db_url = "jdbc:postgresql://hgtgbzti:WC5-4JEsrncWqCWa16P8uUOwdPlx5zJN@hattie.db.elephantsql.com:5432/hgtgbzti";
+    private static String db_url = 	"postgres://hgtgbzti:WC5-4JEsrncWqCWa16P8uUOwdPlx5zJN@hattie.db.elephantsql.com:5432/hgtgbzti";
     private static String db_user = "hgtgbzti";
     private static String db_pw = "WC5-4JEsrncWqCWa16P8uUOwdPlx5zJN";
     public static Connection getDbConnection() {
