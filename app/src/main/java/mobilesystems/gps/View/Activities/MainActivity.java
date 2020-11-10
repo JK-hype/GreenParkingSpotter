@@ -1,26 +1,148 @@
 package mobilesystems.gps.View.Activities;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.ClipData;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.widget.Toast;
+
+import androidx.appcompat.widget.Toolbar;
+
+import com.google.android.material.navigation.NavigationView;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import mobilesystems.gps.R;
+import mobilesystems.gps.View.Fragments.AboutView;
 import mobilesystems.gps.View.Fragments.LoginView;
+import mobilesystems.gps.View.Fragments.ParkingView;
+import mobilesystems.gps.ViewModel.LoginViewModel;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, NavigationDrawerMenu {
+
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    Toolbar toolbar;
+    LoginViewModel loginVM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        drawerLayout = findViewById(R.id.mainFragment);
+        navigationView = findViewById(R.id.navigation_view);
+        toolbar = findViewById(R.id.toolbar_menu);
+
+        setSupportActionBar(toolbar);
+
+        //LoginView
+        // Navigation Drawer Menu
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.bringToFront();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigationDrawerOpen, R.string.navigationDrawerClose);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
         if (savedInstanceState == null) {
             LoginView loginView = new LoginView();
-            FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
-
-            fragmentTransaction.replace(R.id.mainFragment, loginView);
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.container_fragments, loginView); // <-- THIS IS WORKING! I used container_fragments instead of the mainFragment
             fragmentTransaction.commit();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
+        else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        FragmentTransaction fragmentTransaction;
+
+        switch (menuItem.getItemId()) {
+            case R.id.item_park:
+                Toast.makeText(this,"Park clicked", Toast.LENGTH_SHORT).show();
+                ParkingView parkingView = new ParkingView();
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.container_fragments, parkingView);
+                fragmentTransaction.addToBackStack("ParkingView");
+                fragmentTransaction.commit();
+                break;
+            case R.id.item_map:
+                Toast.makeText(this,"Map clicked", Toast.LENGTH_SHORT).show();
+                LoginView loginView = new LoginView();
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.container_fragments, loginView);
+                fragmentTransaction.addToBackStack("LoginView");
+                fragmentTransaction.commit();
+                break;
+            case R.id.item_perks:
+                Toast.makeText(this,"Perks clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.item_account:
+                Toast.makeText(this,"Account clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.item_about:
+                Toast.makeText(this,"About clicked", Toast.LENGTH_SHORT).show();
+                AboutView aboutView = new AboutView();
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.container_fragments, aboutView);
+                fragmentTransaction.addToBackStack("AboutView");
+                fragmentTransaction.commit();
+                break;
+            case R.id.item_logout:
+                Toast.makeText(this,"You have been logged out", Toast.LENGTH_SHORT).show();
+
+                /*loginView = new LoginView();
+                loginVM = new ViewModelProvider(loginView.requireActivity()).get(LoginViewModel.class);
+                loginVM.loginStatus() = false;*/
+
+                loginView = new LoginView();
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.container_fragments, loginView);
+                fragmentTransaction.addToBackStack("LoginView");
+                fragmentTransaction.commit();
+                break;
+            default:
+                break;
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    public void setDrawerLocked(boolean enabled){
+        if(enabled){
+            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        }else{
+            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        }
+    }
+    public void setToolbarVisibility(boolean visible) {
+        if (visible) {
+            findViewById(R.id.toolbar_menu).setVisibility(View.VISIBLE);
+        } else {
+            findViewById(R.id.toolbar_menu).setVisibility(View.INVISIBLE);
         }
     }
 }

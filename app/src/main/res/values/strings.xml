@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">GreenParkingSpotter</string>
+    <string name="navigationDrawerOpen">Open Navigation Drawer</string>
+    <string name="navigationDrawerClose">Close Navigation Drawer</string>
 </resources>
