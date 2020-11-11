@@ -29,8 +29,4 @@ public class LoginViewModel extends ViewModel {
             }
         },username,password);
     }
-
-    public void logout() {
-        loginStatus = new MutableLiveData<>();
-    }
 }
