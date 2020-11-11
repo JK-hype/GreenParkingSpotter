@@ -6,6 +6,7 @@ import mobilesystems.gps.Acquaintance.Callback;
 import mobilesystems.gps.Acquaintance.SharedData;
 
 public class CreateAccountService {
+
     public void createAccount(final Callback callback, String mail, String password, String carType, String carBrand) {
         try {
             Connection db = SharedData.getDbConnection();
@@ -14,8 +15,7 @@ public class CreateAccountService {
             rs.close();
             st.close();
             callback.onResponse(true);
-        }
-        catch (java.sql.SQLException e) {
+        } catch (java.sql.SQLException e) {
             System.out.println(e.getMessage());
             callback.onResponse(false);
         }
