@@ -5,32 +5,109 @@
     android:layout_height="match_parent"
     tools:context="mobilesystems.gps.View.Activities.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="About"
-        android:textSize="50dp" />
-
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="Version"
-            android:textSize="30dp" />
+            android:layout_gravity="center"
+            android:text="ABOUT"
+            android:textSize="50dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_red_light"/>
 
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="#000" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="50dp"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="SEMS@SDU"
-            android:textSize="30dp" />
+            android:text="VERSION:"
+            android:textSize="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="v0.0.1 Pre-Alpha"
+            android:textSize="20dp" />
     </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Jan, Sigurd, Troels"
+            android:textSize="20dp"
+            android:padding="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="jakra20@student.sdu.dk"
+            android:textSize="20dp"
+            android:padding="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="siesp17@student.sdu.dk"
+            android:textSize="20dp"
+            android:padding="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="tkris17@student.sdu.dk"
+            android:textSize="20dp"
+            android:padding="10dp" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/holo_red_light"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerInParent="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BALANCE:"
+                android:textColor="#FFF"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:paddingVertical="20dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100 coins"
+                android:textColor="#FFF"
+                android:textSize="20dp"
+                android:padding="10dp" />
+        </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

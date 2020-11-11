@@ -28,6 +28,7 @@ import mobilesystems.gps.R;
 import mobilesystems.gps.View.Fragments.AboutView;
 import mobilesystems.gps.View.Fragments.LoginView;
 import mobilesystems.gps.View.Fragments.ParkingView;
+import mobilesystems.gps.View.Fragments.PerksView;
 import mobilesystems.gps.ViewModel.LoginViewModel;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, NavigationDrawerMenu {
@@ -98,6 +99,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragmentTransaction.commit();
                 break;
             case R.id.item_perks:
+                PerksView perksView = new PerksView();
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.container_fragments, perksView);
+                fragmentTransaction.addToBackStack("LoginView");
+                fragmentTransaction.commit();
                 break;
             case R.id.item_account:
                 break;
