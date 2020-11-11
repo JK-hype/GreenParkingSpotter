@@ -43,7 +43,6 @@ public class ParkingView extends Fragment {
         btn_park.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(),"PARKED", Toast.LENGTH_SHORT).show();
 
                 Animation animation = new AlphaAnimation(0.0f, 1.0f);
                 animation.setDuration(500); //You can manage the blinking time with this parameter
@@ -68,7 +67,6 @@ public class ParkingView extends Fragment {
         btn_leave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(),"LEFT", Toast.LENGTH_SHORT).show();
 
                 Animation animation = new AlphaAnimation(0.0f, 1.0f);
                 animation.setDuration(500); //You can manage the blinking time with this parameter

@@ -1,6 +1,7 @@
 package mobilesystems.gps.View.Activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -83,7 +84,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (menuItem.getItemId()) {
             case R.id.item_park:
-                Toast.makeText(this,"Park clicked", Toast.LENGTH_SHORT).show();
                 ParkingView parkingView = new ParkingView();
                 fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.container_fragments, parkingView);
@@ -91,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragmentTransaction.commit();
                 break;
             case R.id.item_map:
-                Toast.makeText(this,"Map clicked", Toast.LENGTH_SHORT).show();
                 LoginView loginView = new LoginView();
                 fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.container_fragments, loginView);
@@ -99,13 +98,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragmentTransaction.commit();
                 break;
             case R.id.item_perks:
-                Toast.makeText(this,"Perks clicked", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.item_account:
-                Toast.makeText(this,"Account clicked", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.item_about:
-                Toast.makeText(this,"About clicked", Toast.LENGTH_SHORT).show();
                 AboutView aboutView = new AboutView();
                 fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.container_fragments, aboutView);
@@ -113,8 +109,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragmentTransaction.commit();
                 break;
             case R.id.item_logout:
-                Toast.makeText(this,"You have been logged out", Toast.LENGTH_SHORT).show();
-
                 loginVM.logout();
 
                 loginView = new LoginView();
@@ -131,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    @Override
     public void setDrawerLocked(boolean enabled){
         if(enabled){
             drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
@@ -138,11 +133,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         }
     }
+    @Override
     public void setToolbarVisibility(boolean visible) {
         if (visible) {
             findViewById(R.id.toolbar_menu).setVisibility(View.VISIBLE);
         } else {
             findViewById(R.id.toolbar_menu).setVisibility(View.INVISIBLE);
         }
+    }
+    @Override
+    public void setItemPark() {
+        navigationView.setCheckedItem(R.id.item_park);
     }
 }

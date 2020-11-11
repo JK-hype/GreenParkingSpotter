@@ -31,6 +31,6 @@ public class LoginViewModel extends ViewModel {
     }
 
     public void logout() {
-        loginStatus.postValue(false);
+        loginStatus = new MutableLiveData<>();
     }
 }

@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import mobilesystems.gps.Acquaintance.SharedData;
 import mobilesystems.gps.R;
 import mobilesystems.gps.View.Activities.NavigationDrawerMenu;
 import mobilesystems.gps.ViewModel.LoginViewModel;
@@ -58,10 +59,11 @@ public class LoginView extends Fragment {
                     fragmentTransaction.replace(R.id.container_fragments, parkingView);
                     fragmentTransaction.commit();
 
+                    ((NavigationDrawerMenu)getActivity()).setItemPark();
                     ((NavigationDrawerMenu)getActivity()).setDrawerLocked(false);
                     ((NavigationDrawerMenu)getActivity()).setToolbarVisibility(true);
                 }else{
-                    //Toast.makeText(getContext(),"Login failed.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"Login failed.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -78,7 +80,7 @@ public class LoginView extends Fragment {
                     Toast.makeText(getContext(), "You have not typed anything.", Toast.LENGTH_SHORT).show();
                 }
 
-
+                SharedData.hideKeyboard(getContext(), getView(), getActivity());
         }
         });
 
