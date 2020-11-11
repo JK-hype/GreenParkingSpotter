@@ -61,7 +61,7 @@ public class LoginView extends Fragment {
                     ((NavigationDrawerMenu)getActivity()).setDrawerLocked(false);
                     ((NavigationDrawerMenu)getActivity()).setToolbarVisibility(true);
                 }else{
-                    Toast.makeText(getContext(),"Login failed.", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(),"Login failed.", Toast.LENGTH_SHORT).show();
                 }
             }
         });

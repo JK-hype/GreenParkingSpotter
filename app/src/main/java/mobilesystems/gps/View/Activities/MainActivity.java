@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        loginVM = new ViewModelProvider(this).get(LoginViewModel.class);
+
         drawerLayout = findViewById(R.id.mainFragment);
         navigationView = findViewById(R.id.navigation_view);
         toolbar = findViewById(R.id.toolbar_menu);
@@ -113,9 +115,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.item_logout:
                 Toast.makeText(this,"You have been logged out", Toast.LENGTH_SHORT).show();
 
-                /*loginView = new LoginView();
-                loginVM = new ViewModelProvider(loginView.requireActivity()).get(LoginViewModel.class);
-                loginVM.loginStatus() = false;*/
+                loginVM.logout();
 
                 loginView = new LoginView();
                 fragmentTransaction = getSupportFragmentManager().beginTransaction();
