@@ -5,38 +5,64 @@
     android:layout_height="match_parent"
     tools:context="mobilesystems.gps.View.Activities.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="PERKS"
-        android:textSize="50dp" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_
-            android:text="Version"
-            android:textSize="30dp" />
+            android:text="PERKS"
+            android:textSize="50dp"
+            android:t
+            android:textColor="@android:color/holo_red_light"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="#000" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="50dp"
+        android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
-            android:text="SEMS@SDU"
-            android:textSize="30dp" />
-        
-        <Button
-            android:layout_width=""
-            android:layout_height=""
+            android:text="20% on burgers in the canteen"
+            android:textSize="20dp"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/textview_style"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:text="50% on SDU Fitness"
+            android:textSize="20dp"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/textview_style"/>
         
     </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Update"
+        android:textColor="#FFF"
+        android:textSize="20dp"
+        android:background="@android:color/holo_red_light" />
 
 </RelativeLayout>
