@@ -1,23 +1,35 @@
 package mobilesystems.gps.Model.Repository;
 
-import java.sql.*;
+import android.content.Context;
+import android.os.AsyncTask;
 
 import mobilesystems.gps.Acquaintance.Callback;
 import mobilesystems.gps.Acquaintance.SharedData;
+import mobilesystems.gps.Model.DataObjects.User;
+import mobilesystems.gps.Model.DataObjects.UserDao;
 
 public class CreateAccountService {
 
-    public void createAccount(final Callback callback, String mail, String password, String carType, String carBrand) {
-        try {
-            Connection db = SharedData.getDbConnection();
-            Statement st = db.createStatement();
-            ResultSet rs = st.executeQuery("INSERT INTO users VALUES ('" + mail + "', '" + password + "', '" + carType + "', '" + carBrand + "');");
-            rs.close();
-            st.close();
-            callback.onResponse(true);
-        } catch (java.sql.SQLException e) {
-            System.out.println(e.getMessage());
-            callback.onResponse(false);
-        }
+    public void createAccount(final Callback callback, final String mail, final String password, final String carType, final String carBrand, final Context c) {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                User user = new User();
+                user.student_mail = mail;
+                user.password = password;
+                user.car_type = carType;
+                user.car_brand = carBrand;
+
+                UserDao userDao = SharedData.getInstance().getDatabase(c).userDao();
+                User existingUser = userDao.findByMail(mail);
+                if (existingUser == null || existingUser != user) {
+                    userDao.insert(user);
+                    callback.onResponse(true);
+                } else {
+                    callback.onResponse(false);
+                }
+                return null;
+            }
+        }.execute();
     }
 }

@@ -49,7 +49,7 @@ public class CreateAccountView extends Fragment {
             @Override
             public void onClick(View v) {
                 VM.createAccount(txt_createStudentMail.getText().toString(), txt_createPassword.getText().toString(),
-                                 txt_createCarType.getText().toString(), txt_createCarBrand.getText().toString());
+                                 txt_createCarType.getText().toString(), txt_createCarBrand.getText().toString(), getContext());
             }
         });
 

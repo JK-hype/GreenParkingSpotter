@@ -1,5 +1,7 @@
 package mobilesystems.gps.ViewModel;
 
+import android.content.Context;
+
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -19,12 +21,12 @@ public class CreateAccountViewModel extends ViewModel {
         return createAccountStatus;
     }
 
-    public void createAccount(String mail, String password, String carType, String carBrand) {
+    public void createAccount(String mail, String password, String carType, String carBrand, Context c) {
         createAccountService.createAccount(new Callback() {
             @Override
             public void onResponse(Object o) {
                 createAccountStatus.postValue((boolean) o);
             }
-        },mail,password, carType, carBrand);
+        },mail,password, carType, carBrand, c);
     }
 }

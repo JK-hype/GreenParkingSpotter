@@ -1,6 +1,7 @@
 package mobilesystems.gps.View.Fragments;
 
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,17 +44,16 @@ public class LoginView extends Fragment {
 
         loginVM = new ViewModelProvider(requireActivity()).get(LoginViewModel.class);
 
-        loginVM.loginStatus().observe(requireActivity(), new Observer<Boolean>() {
+        loginVM.loginStatus().observe(requireActivity(), new Observer<Pair<Boolean, String>>() {
             @Override
-            public void onChanged(Boolean loginStatus) {
-                if (loginStatus) {
+            public void onChanged(Pair<Boolean, String> status) {
+                if (status.first) {
                     ParkingView parkingView = new ParkingView();
                     FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
-
                     fragmentTransaction.replace(R.id.mainFragment, parkingView);
                     fragmentTransaction.commit();
                 } else {
-                    Toast.makeText(getContext(), "Login failed.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), status.second, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -65,7 +65,7 @@ public class LoginView extends Fragment {
                 String mail = txt_studentMail.getText().toString();
                 String password = txt_password.getText().toString();
                 if (!mail.isEmpty() && !password.isEmpty()) {
-                    loginVM.login(mail, password);
+                    loginVM.login(mail, password, getContext());
                 } else {
                     Toast.makeText(getContext(), "You have not typed anything.", Toast.LENGTH_SHORT).show();
                 }
