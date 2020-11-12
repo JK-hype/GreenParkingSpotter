@@ -66,8 +66,8 @@ public class CreateAccountView extends Fragment {
         btn_create_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VM.createAccount(txt_createStudentMail.getText().toString(), txt_createPassword.getText().toString(),
-                                 txt_createCarType.getText().toString(), txt_createCarBrand.getText().toString(), getContext());
+                VM.createAccount(txt_createStudentMail.getText().toString().trim(), txt_createPassword.getText().toString().trim(),
+                                 txt_createCarType.getText().toString().trim(), txt_createCarBrand.getText().toString().trim(), getContext());
             }
         });
 

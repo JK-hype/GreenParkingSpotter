@@ -16,7 +16,7 @@ public class LoginService {
             @Override
             protected Void doInBackground(Void... params) {
                 UserDao userDao = Common.getInstance().getDatabase(c).userDao();
-                User user = userDao.findByMail(mail);
+                User user = userDao.getUserByMail(mail);
                 if (user == null || !user.student_mail.equals(mail)) {
                     Pair<Boolean, String> result = new Pair<>(false, "User does not exist");
                     callback.onResponse(result);

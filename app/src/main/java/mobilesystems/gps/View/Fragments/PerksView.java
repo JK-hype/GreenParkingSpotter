@@ -12,14 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import org.w3c.dom.Text;
-
+import mobilesystems.gps.Acquaintance.IUser;
+import mobilesystems.gps.Acquaintance.SessionData;
 import mobilesystems.gps.R;
 
 public class PerksView extends Fragment {
 
     Button btn_redeem1, btn_redeem2, btn_redeem3;
-    TextView textView_discount1, textView_discount2, textView_discount3;
+    TextView txt_discount1, txt_discount2, txt_discount3, coins;
 
     @Nullable
     @Override
@@ -29,9 +29,10 @@ public class PerksView extends Fragment {
         btn_redeem1 = view.findViewById(R.id.btn_redeem1);
         btn_redeem2 = view.findViewById(R.id.btn_redeem2);
         btn_redeem3 = view.findViewById(R.id.btn_redeem3);
-        textView_discount1 = view.findViewById(R.id.textView_discount1);
-        textView_discount2 = view.findViewById(R.id.textView_discount2);
-        textView_discount3 = view.findViewById(R.id.textView_discount3);
+        txt_discount1 = view.findViewById(R.id.textView_discount1);
+        txt_discount2 = view.findViewById(R.id.textView_discount2);
+        txt_discount3 = view.findViewById(R.id.textView_discount3);
+        coins = view.findViewById(R.id.txt_perks_coins);
 
         return view;
     }
@@ -40,29 +41,64 @@ public class PerksView extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        final IUser user = SessionData.getInstance().getCurrentUser();
+        coins.setText(user.getCoins() + " coins");
+
         btn_redeem1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Discount redeemed!", Toast.LENGTH_SHORT).show();
-                textView_discount1.setVisibility(View.GONE);
-                btn_redeem1.setVisibility(View.GONE);
+                if (user.payCoins(PerkPrice.LOW.getPrice())) {
+                    Toast.makeText(getContext(), "Discount redeemed!", Toast.LENGTH_SHORT).show();
+                    txt_discount1.setVisibility(View.GONE);
+                    btn_redeem1.setVisibility(View.GONE);
+                    coins.setText(user.getCoins() + " coins");
+                } else {
+                    Toast.makeText(getContext(), "Insufficient funds!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         btn_redeem2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Discount redeemed!", Toast.LENGTH_SHORT).show();
-                textView_discount2.setVisibility(View.GONE);
-                btn_redeem2.setVisibility(View.GONE);
+                if (user.payCoins(PerkPrice.MEDIUM.getPrice())) {
+                    Toast.makeText(getContext(), "Discount redeemed!", Toast.LENGTH_SHORT).show();
+                    txt_discount2.setVisibility(View.GONE);
+                    btn_redeem2.setVisibility(View.GONE);
+                    coins.setText(user.getCoins() + " coins");
+                } else {
+                    Toast.makeText(getContext(), "Insufficient funds!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         btn_redeem3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Insufficient funds!", Toast.LENGTH_SHORT).show();
+                if (user.payCoins(PerkPrice.HIGH.getPrice())) {
+                    Toast.makeText(getContext(), "Discount redeemed!", Toast.LENGTH_SHORT).show();
+                    txt_discount3.setVisibility(View.GONE);
+                    btn_redeem3.setVisibility(View.GONE);
+                    coins.setText(user.getCoins() + " coins");
+                } else {
+                    Toast.makeText(getContext(), "Insufficient funds!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
+    }
+}
+
+enum PerkPrice {
+    LOW(25), MEDIUM(50), HIGH(75);
+
+    private int price;
+
+    public int getPrice() {
+        return this.price;
+    }
+
+    private PerkPrice(int price) {
+        this.price = price;
     }
 }

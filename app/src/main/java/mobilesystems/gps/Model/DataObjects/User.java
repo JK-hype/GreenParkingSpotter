@@ -26,6 +26,9 @@ public class User implements IUser {
     @ColumnInfo(name = "car_brand")
     public String car_brand;
 
+    @ColumnInfo(name = "coins")
+    public int coins;
+
     @Override
     public int getUid() {
         return uid;
@@ -49,5 +52,19 @@ public class User implements IUser {
     @Override
     public String getCar_brand() {
         return car_brand;
+    }
+
+    @Override
+    public int getCoins() {
+        return coins;
+    }
+
+    @Override
+    public boolean payCoins(int coins) {
+        if (this.coins - coins < 0) {
+            return false;
+        }
+        this.coins -= coins;
+        return true;
     }
 }

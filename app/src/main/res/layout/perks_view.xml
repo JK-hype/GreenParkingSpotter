@@ -48,7 +48,7 @@
                 android:layout_toStartOf="@+id/btn_redeem1"
                 android:background="@drawable/textview_style"
                 android:padding="10dp"
-                android:text="20% on burgers"
+                android:text="20% on food"
                 android:textSize="20dp" />
 
             <Button
@@ -100,7 +100,7 @@
                 android:layout_toStartOf="@+id/btn_redeem3"
                 android:background="@drawable/textview_style"
                 android:padding="10dp"
-                android:text="110% on cake"
+                android:text="2 for 1 cakes price"
                 android:textSize="20dp" />
 
             <Button
@@ -137,6 +137,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/txt_perks_coins"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

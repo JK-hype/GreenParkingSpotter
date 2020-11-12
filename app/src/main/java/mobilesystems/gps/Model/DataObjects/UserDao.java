@@ -9,14 +9,11 @@ import java.util.List;
 
 @Dao
 public interface UserDao {
-    @Query("SELECT * FROM users")
-    List<User> getAll();
-
-    @Query("SELECT * FROM users WHERE uid IN (:userIds)")
-    List<User> loadAllByIds(int[] userIds);
+    @Query("SELECT * FROM users WHERE uid=:Id")
+    List<User> getUserById(int Id);
 
     @Query("SELECT * FROM users WHERE student_mail LIKE :student_mail LIMIT 1")
-    User findByMail(String student_mail);
+    User getUserByMail(String student_mail);
 
     @Insert
     void insert(User user);

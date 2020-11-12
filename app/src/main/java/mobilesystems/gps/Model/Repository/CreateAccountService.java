@@ -19,9 +19,10 @@ public class CreateAccountService {
                 user.password = password;
                 user.car_type = carType;
                 user.car_brand = carBrand;
+                user.coins = 100;
 
                 UserDao userDao = Common.getInstance().getDatabase(c).userDao();
-                User existingUser = userDao.findByMail(mail);
+                User existingUser = userDao.getUserByMail(mail);
                 if (existingUser == null || existingUser != user) {
                     userDao.insert(user);
                     callback.onResponse(true);

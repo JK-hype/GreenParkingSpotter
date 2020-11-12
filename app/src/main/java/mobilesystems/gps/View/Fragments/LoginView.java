@@ -85,13 +85,12 @@ public class LoginView extends Fragment {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                String mail = txt_studentMail.getText().toString();
-                String password = txt_password.getText().toString();
+                String mail = txt_studentMail.getText().toString().trim();
+                String password = txt_password.getText().toString().trim();
                 if (!mail.isEmpty() && !password.isEmpty()) {
                     loginVM.login(mail, password, getContext());
                 } else {
-                    Toast.makeText(getContext(), "You have not typed anything.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Please type in mail and password.", Toast.LENGTH_LONG).show();
                 }
                 Common.getInstance().hideKeyboard(getContext(), getView(), getActivity());
             }
