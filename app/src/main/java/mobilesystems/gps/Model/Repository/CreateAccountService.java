@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import mobilesystems.gps.Acquaintance.Callback;
-import mobilesystems.gps.Acquaintance.SharedData;
+import mobilesystems.gps.Acquaintance.Common;
 import mobilesystems.gps.Model.DataObjects.User;
 import mobilesystems.gps.Model.DataObjects.UserDao;
 
@@ -20,7 +20,7 @@ public class CreateAccountService {
                 user.car_type = carType;
                 user.car_brand = carBrand;
 
-                UserDao userDao = SharedData.getInstance().getDatabase(c).userDao();
+                UserDao userDao = Common.getInstance().getDatabase(c).userDao();
                 User existingUser = userDao.findByMail(mail);
                 if (existingUser == null || existingUser != user) {
                     userDao.insert(user);

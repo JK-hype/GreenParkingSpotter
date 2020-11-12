@@ -22,6 +22,7 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="2dp"
+            android:layout_marginHorizontal="50dp"
             android:background="#000" />
 
     </LinearLayout>
@@ -33,81 +34,105 @@
         android:layout_margin="50dp"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginVertical="15dp"
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/txt_version"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:text="VERSION:"
+                android:layout_centerHorizontal="true"
+                android:text="version"
+                android:textAllCaps="true"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/txt_version_nr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/txt_version"
                 android:layout_gravity="center"
-                android:text="v0.0.1 Pre-Alpha"
-                android:textSize="16dp" />
-        </LinearLayout>
+                android:text="v1.0" />
+        </RelativeLayout>
 
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:text="Creators"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:textSize="20dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:text="Jan, Sigurd, Troels"
-            android:textAlignment="center"
-            android:textSize="16dp" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="vertical">
+            android:layout_marginVertical="15dp"
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/txt_creators"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Student mails"
-                android:textAlignment="center"
+                android:layout_centerHorizontal="true"
+                android:text="creators"
+                android:textAllCaps="true"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/txt_creators_names"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="jakra20@student.sdu.dk"
-                android:textAlignment="center"
-                android:textSize="16dp" />
+                android:layout_below="@id/txt_creators"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:text="Jan - Sigurd - Troels" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginVertical="15dp"
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/txt_creator_mail"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="siesp17@student.sdu.dk"
-                android:textAlignment="center"
-                android:textSize="16dp" />
+                android:layout_centerHorizontal="true"
+                android:text="student mail"
+                android:textAllCaps="true"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/txt_creator_jan_mail"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="tkris17@student.sdu.dk"
-                android:textAlignment="center"
-                android:textSize="16dp" />
-        </LinearLayout>
+                android:layout_below="@id/txt_creator_mail"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:text="jakra20@student.sdu.dk" />
 
+            <TextView
+                android:id="@+id/txt_creator_sigurd_mail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_creator_jan_mail"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:text="siesp17@student.sdu.dk" />
+
+            <TextView
+                android:id="@+id/txt_creator_troels_mail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_creator_sigurd_mail"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:text="tkris17@student.sdu.dk" />
+        </RelativeLayout>
     </LinearLayout>
 
     <RelativeLayout
@@ -117,15 +142,30 @@
         android:background="@android:color/holo_red_light"
         android:orientation="horizontal">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingVertical="20dp"
-                android:layout_centerInParent="true"
-                android:text="Green Parking Spotter"
+                android:paddingTop="20dp"
+                android:text="GREEN PARKING SPOTTER"
                 android:textColor="#FFF"
                 android:textSize="20dp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingBottom="20dp"
+                android:text="Contact information of the developers"
+                android:textColor="#FFF"
+                android:textSize="12dp" />
+        </LinearLayout>
     </RelativeLayout>
 
 </RelativeLayout>

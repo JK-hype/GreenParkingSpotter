@@ -1,6 +1,5 @@
 package mobilesystems.gps.Acquaintance;
 
-import android.content.Context;
 import android.app.Activity;
 import android.content.Context;
 import android.view.View;
@@ -8,18 +7,15 @@ import android.view.inputmethod.InputMethodManager;
 
 import androidx.room.Room;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+public class Common {
 
-public class SharedData {
+    private static Common instance;
 
-    private static SharedData instance;
+    private Common() {}
 
-    private SharedData() {}
-
-    public static SharedData getInstance() {
+    public static Common getInstance() {
         if (instance == null) {
-            instance = new SharedData();
+            instance = new Common();
         }
         return instance;
     }

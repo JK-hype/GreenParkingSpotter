@@ -2,17 +2,11 @@ package mobilesystems.gps.Model.Repository;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Looper;
 import android.util.Pair;
-import android.widget.Toast;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 import mobilesystems.gps.Acquaintance.Callback;
-import mobilesystems.gps.Acquaintance.SharedData;
-import mobilesystems.gps.Model.Adapters.CarAdapter;
+import mobilesystems.gps.Acquaintance.SessionData;
+import mobilesystems.gps.Acquaintance.Common;
 import mobilesystems.gps.Model.DataObjects.User;
 import mobilesystems.gps.Model.DataObjects.UserDao;
 
@@ -25,7 +19,7 @@ public class LoginService {
                 user.student_mail = mail;
                 user.password = password;
 
-                UserDao userDao = SharedData.getInstance().getDatabase(c).userDao();
+                UserDao userDao = Common.getInstance().getDatabase(c).userDao();
                 User existingUser = userDao.findByMail(mail);
                 if (existingUser == null || !existingUser.student_mail.equals(mail)) {
                     Pair<Boolean, String> result = new Pair<>(false, "User does not exist");
@@ -38,6 +32,7 @@ public class LoginService {
                     return null;
                 }
 
+                SessionData.getInstance().setCurrentUser(existingUser);
                 Pair<Boolean, String> result = new Pair<>(true, "");
                 callback.onResponse(result);
                 return null;

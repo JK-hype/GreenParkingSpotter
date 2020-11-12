@@ -3,22 +3,23 @@ package mobilesystems.gps.View.Fragments;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import mobilesystems.gps.Acquaintance.SharedData;
+import mobilesystems.gps.Acquaintance.Common;
 import mobilesystems.gps.R;
 import mobilesystems.gps.View.Activities.NavigationDrawerMenu;
 import mobilesystems.gps.ViewModel.LoginViewModel;
@@ -27,12 +28,14 @@ public class LoginView extends Fragment {
     Button btn_login, btn_goToCreateAccount;
     EditText txt_studentMail, txt_password;
     LoginViewModel loginVM;
+    RelativeLayout layout;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.login_view, container, false);
 
+        layout = view.findViewById(R.id.layout);
         btn_login = view.findViewById(R.id.btn_login);
         btn_goToCreateAccount = view.findViewById(R.id.btn_goToCreateAccount);
         txt_studentMail = view.findViewById(R.id.txt_studentMail);
@@ -69,6 +72,16 @@ public class LoginView extends Fragment {
             }
         });
 
+        layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Common.getInstance().hideKeyboard(getContext(), v, getActivity());
+                txt_studentMail.clearFocus();
+                txt_password.clearFocus();
+                return false;
+            }
+        });
+
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,7 +93,7 @@ public class LoginView extends Fragment {
                 } else {
                     Toast.makeText(getContext(), "You have not typed anything.", Toast.LENGTH_SHORT).show();
                 }
-                SharedData.getInstance().hideKeyboard(getContext(), getView(), getActivity());
+                Common.getInstance().hideKeyboard(getContext(), getView(), getActivity());
             }
         });
 
@@ -89,7 +102,7 @@ public class LoginView extends Fragment {
             public void onClick(View v) {
                 CreateAccountView createAccountView = new CreateAccountView();
                 FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.mainFragment, createAccountView);
+                fragmentTransaction.replace(R.id.container_fragments, createAccountView);
                 fragmentTransaction.addToBackStack("CreateAccountView");
                 fragmentTransaction.commit();
             }

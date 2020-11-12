@@ -15,13 +15,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="PERKS"
+            android:textColor="@android:color/holo_red_light"
             android:textSize="50dp"
-            android:textStyle="bold"
-            android:textColor="@android:color/holo_red_light"/>
+            android:textStyle="bold" />
 
         <View
             android:layout_width="fill_parent"
             android:layout_height="2dp"
+            android:layout_marginHorizontal="50dp"
             android:background="#000" />
 
     </LinearLayout>
@@ -37,78 +38,78 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="horizontal"
-            android:layout_marginVertical="5dp">
+            android:layout_marginVertical="5dp"
+            android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/textView_discount1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView_discount1"
-                android:text="20% on burgers"
-                android:textSize="20dp"
-                android:padding="10dp"
                 android:layout_toStartOf="@+id/btn_redeem1"
-                android:background="@drawable/textview_style" />
+                android:background="@drawable/textview_style"
+                android:padding="10dp"
+                android:text="20% on burgers"
+                android:textSize="20dp" />
 
             <Button
                 android:id="@+id/btn_redeem1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="REDEEM"
+                android:layout_alignParentEnd="true"
                 android:layout_gravity="center"
-                android:layout_alignParentEnd="true"/>
+                android:text="REDEEM" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="horizontal"
-            android:layout_marginVertical="5dp">
+            android:layout_marginVertical="5dp"
+            android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/textView_discount2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView_discount2"
-                android:text="50% on SDU Fitness"
-                android:textSize="20dp"
-                android:padding="10dp"
                 android:layout_toStartOf="@+id/btn_redeem2"
-                android:background="@drawable/textview_style"/>
+                android:background="@drawable/textview_style"
+                android:padding="10dp"
+                android:text="50% on SDU Fitness"
+                android:textSize="20dp" />
 
             <Button
                 android:id="@+id/btn_redeem2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="REDEEM"
+                android:layout_alignParentEnd="true"
                 android:layout_gravity="center"
-                android:layout_alignParentEnd="true"/>
+                android:text="REDEEM" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="horizontal"
-            android:layout_marginVertical="5dp">
+            android:layout_marginVertical="5dp"
+            android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/textView_discount3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView_discount3"
-                android:text="110% on cake"
-                android:textSize="20dp"
-                android:padding="10dp"
                 android:layout_toStartOf="@+id/btn_redeem3"
-                android:background="@drawable/textview_style"/>
+                android:background="@drawable/textview_style"
+                android:padding="10dp"
+                android:text="110% on cake"
+                android:textSize="20dp" />
 
             <Button
                 android:id="@+id/btn_redeem3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="REDEEM"
+                android:layout_alignParentEnd="true"
                 android:layout_gravity="center"
-                android:layout_alignParentEnd="true"/>
+                android:text="REDEEM" />
         </RelativeLayout>
 
     </LinearLayout>
@@ -123,24 +124,26 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_centerInParent="true">
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingTop="20dp"
                 android:text="BALANCE"
                 android:textColor="#FFF"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                android:paddingTop="20dp" />
+                android:textStyle="bold" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingBottom="20dp"
                 android:text="100 coins"
                 android:textColor="#FFF"
-                android:textSize="12dp"
-                android:paddingBottom="20dp"
-                android:layout_gravity="center"/>
+                android:textSize="12dp" />
         </LinearLayout>
     </RelativeLayout>
 

@@ -15,13 +15,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="PARKING"
+            android:textColor="@android:color/holo_red_light"
             android:textSize="50dp"
-            android:textStyle="bold"
-            android:textColor="@android:color/holo_red_light"/>
+            android:textStyle="bold" />
 
         <View
             android:layout_width="fill_parent"
             android:layout_height="2dp"
+            android:layout_marginHorizontal="50dp"
             android:background="#000" />
 
     </LinearLayout>
@@ -33,8 +34,8 @@
         android:layout_centerInParent="true"
         android:background="@drawable/btn_park"
         android:text="PARK"
-        android:textSize="30dp"
-        android:textColor="#FFF"/>
+        android:textColor="#FFF"
+        android:textSize="30dp" />
 
     <Button
         android:id="@+id/btn_leave"
@@ -43,8 +44,8 @@
         android:layout_centerInParent="true"
         android:background="@drawable/btn_leave"
         android:text="LEAVE"
-        android:textSize="30dp"
-        android:textColor="#FFF"/>
+        android:textColor="#FFF"
+        android:textSize="30dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -56,24 +57,26 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_centerInParent="true">
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingTop="20dp"
                 android:text="PARK YOUR CAR HERE"
                 android:textColor="#FFF"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                android:paddingTop="20dp" />
+                android:textStyle="bold" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingBottom="20dp"
                 android:text="Press the big button!"
                 android:textColor="#FFF"
-                android:textSize="12dp"
-                android:paddingBottom="20dp"
-                android:layout_gravity="center"/>
+                android:textSize="12dp" />
         </LinearLayout>
     </RelativeLayout>
 
