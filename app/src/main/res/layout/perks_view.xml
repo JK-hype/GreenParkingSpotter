@@ -43,6 +43,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/textView_discount1"
                 android:text="20% on burgers"
                 android:textSize="20dp"
                 android:padding="10dp"
@@ -68,6 +69,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/textView_discount2"
                 android:text="50% on SDU Fitness"
                 android:textSize="20dp"
                 android:padding="10dp"
@@ -93,6 +95,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/textView_discount3"
                 android:text="110% on cake"
                 android:textSize="20dp"
                 android:padding="10dp"
