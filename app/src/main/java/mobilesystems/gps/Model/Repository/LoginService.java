@@ -15,24 +15,20 @@ public class LoginService {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-                User user = new User();
-                user.student_mail = mail;
-                user.password = password;
-
                 UserDao userDao = Common.getInstance().getDatabase(c).userDao();
-                User existingUser = userDao.findByMail(mail);
-                if (existingUser == null || !existingUser.student_mail.equals(mail)) {
+                User user = userDao.findByMail(mail);
+                if (user == null || !user.student_mail.equals(mail)) {
                     Pair<Boolean, String> result = new Pair<>(false, "User does not exist");
                     callback.onResponse(result);
                     return null;
                 }
-                if (!existingUser.password.equals(password)) {
+                if (!user.password.equals(password)) {
                     Pair<Boolean, String> result = new Pair<>(false, "Wrong password. Try again");
                     callback.onResponse(result);
                     return null;
                 }
 
-                SessionData.getInstance().setCurrentUser(existingUser);
+                SessionData.getInstance().setCurrentUser(user);
                 Pair<Boolean, String> result = new Pair<>(true, "");
                 callback.onResponse(result);
                 return null;
