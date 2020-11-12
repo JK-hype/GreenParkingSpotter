@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="mobilesystems.gps.View.Activities.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="PERKS"
+            android:textSize="50dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_red_light"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="#000" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="50dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginVertical="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView_discount1"
+                android:text="20% on burgers"
+                android:textSize="20dp"
+                android:padding="10dp"
+                android:layout_toStartOf="@+id/btn_redeem1"
+                android:background="@drawable/textview_style" />
+
+            <Button
+                android:id="@+id/btn_redeem1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="REDEEM"
+                android:layout_gravity="center"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginVertical="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView_discount2"
+                android:text="50% on SDU Fitness"
+                android:textSize="20dp"
+                android:padding="10dp"
+                android:layout_toStartOf="@+id/btn_redeem2"
+                android:background="@drawable/textview_style"/>
+
+            <Button
+                android:id="@+id/btn_redeem2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="REDEEM"
+                android:layout_gravity="center"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginVertical="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView_discount3"
+                android:text="110% on cake"
+                android:textSize="20dp"
+                android:padding="10dp"
+                android:layout_toStartOf="@+id/btn_redeem3"
+                android:background="@drawable/textview_style"/>
+
+            <Button
+                android:id="@+id/btn_redeem3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="REDEEM"
+                android:layout_gravity="center"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/holo_red_light"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BALANCE"
+                android:textColor="#FFF"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:paddingTop="20dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100 coins"
+                android:textColor="#FFF"
+                android:textSize="12dp"
+                android:paddingBottom="20dp"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
