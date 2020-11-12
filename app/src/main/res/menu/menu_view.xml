@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <!--xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_red_light"
+    tools:context="mobilesystems.gps.View.Activities.MainActivity">-->
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/item_park"
+            android:title="PARK"
+            android:icon="@drawable/icon_home" />
+
+        <item
+            android:id="@+id/item_map"
+            android:title="MAP"
+            android:icon="@drawable/icon_map" />
+
+        <item
+            android:id="@+id/item_perks"
+            android:title="PERKS"
+            android:icon="@drawable/icon_perks" />
+
+        <item
+            android:id="@+id/item_account"
+            android:title="ACCOUNT"
+            android:icon="@drawable/icon_account" />
+
+        <item
+            android:id="@+id/item_about"
+            android:title="ABOUT"
+            android:icon="@drawable/icon_info" />
+
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/item_logout"
+            android:title="LOG OUT"
+            android:icon="@drawable/icon_logout" />
+    </group>
+
+</menu>

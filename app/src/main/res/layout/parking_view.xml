@@ -11,5 +11,25 @@
         android:layout_height="200dp"
         android:layout_centerInParent="true"
         android:background="@drawable/btn_park"
-        android:text="PARK"/>
+        android:text="PARK"
+        android:textSize="30dp"
+        android:textColor="#FFF"/>
+
+    <Button
+        android:id="@+id/btn_leave"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/btn_leave"
+        android:text="LEAVE"
+        android:textSize="30dp"
+        android:textColor="#FFF"/>
+
+    <!--<ImageView
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_menu"
+        android:padding="15dp"
+        android:id="@+id/imageView_menu"/>-->
 </RelativeLayout>

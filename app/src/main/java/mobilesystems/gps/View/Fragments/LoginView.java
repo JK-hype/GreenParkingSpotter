@@ -11,13 +11,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import mobilesystems.gps.Acquaintance.SharedData;
 import mobilesystems.gps.R;
+import mobilesystems.gps.View.Activities.NavigationDrawerMenu;
 import mobilesystems.gps.ViewModel.LoginViewModel;
 
 public class LoginView extends Fragment {
@@ -35,6 +38,10 @@ public class LoginView extends Fragment {
         txt_studentMail = view.findViewById(R.id.txt_studentMail);
         txt_password = view.findViewById(R.id.txt_password);
 
+        // Locking the Navigation Drawer on the Login View
+        ((NavigationDrawerMenu)getActivity()).setDrawerLocked(true);
+        ((NavigationDrawerMenu)getActivity()).setToolbarVisibility(false);
+
         return view;
     }
 
@@ -50,8 +57,11 @@ public class LoginView extends Fragment {
                 if (status.first) {
                     ParkingView parkingView = new ParkingView();
                     FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.mainFragment, parkingView);
+                    fragmentTransaction.replace(R.id.container_fragments, parkingView);
                     fragmentTransaction.commit();
+		    ((NavigationDrawerMenu)getActivity()).setItemPark();
+                    ((NavigationDrawerMenu)getActivity()).setDrawerLocked(false);
+                    ((NavigationDrawerMenu)getActivity()).setToolbarVisibility(true);
                 } else {
                     Toast.makeText(getContext(), status.second, Toast.LENGTH_SHORT).show();
                 }
@@ -71,7 +81,8 @@ public class LoginView extends Fragment {
                 }
 
 
-            }
+                SharedData.hideKeyboard(getContext(), getView(), getActivity());
+        }
         });
 
         btn_goToCreateAccount.setOnClickListener(new View.OnClickListener() {
@@ -86,5 +97,11 @@ public class LoginView extends Fragment {
             }
         });
     }
+
+    /*@Nullable
+    @Override
+    public void onDestroyView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        final View view = inflater.inflate(R.layout.login_view, container, false)
+    }*/
 
 }
