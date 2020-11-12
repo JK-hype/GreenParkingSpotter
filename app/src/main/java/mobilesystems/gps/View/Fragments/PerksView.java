@@ -43,7 +43,9 @@ public class PerksView extends Fragment {
         btn_redeem1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Insufficient funds!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Discount redeemed!", Toast.LENGTH_SHORT).show();
+                textView_discount1.setVisibility(View.GONE);
+                btn_redeem1.setVisibility(View.GONE);
             }
         });
 
@@ -52,14 +54,14 @@ public class PerksView extends Fragment {
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Discount redeemed!", Toast.LENGTH_SHORT).show();
                 textView_discount2.setVisibility(View.GONE);
+                btn_redeem2.setVisibility(View.GONE);
             }
         });
 
         btn_redeem3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Discount redeemed!", Toast.LENGTH_SHORT).show();
-                textView_discount3.setVisibility(View.GONE);
+                Toast.makeText(getContext(), "Insufficient funds!", Toast.LENGTH_SHORT).show();
             }
         });
     }

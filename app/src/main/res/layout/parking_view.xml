@@ -5,6 +5,27 @@
     android:layout_height="match_parent"
     tools:context="mobilesystems.gps.View.Activities.MainActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="PARKING"
+            android:textSize="50dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_red_light"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="#000" />
+
+    </LinearLayout>
+
     <Button
         android:id="@+id/btn_park"
         android:layout_width="200dp"
@@ -25,11 +46,35 @@
         android:textSize="30dp"
         android:textColor="#FFF"/>
 
-    <!--<ImageView
-        android:layout_width="wrap_content"
-        android:gravity="center"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/icon_menu"
-        android:padding="15dp"
-        android:id="@+id/imageView_menu"/>-->
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/holo_red_light"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PARK YOUR CAR HERE"
+                android:textColor="#FFF"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:paddingTop="20dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Press the big button!"
+                android:textColor="#FFF"
+                android:textSize="12dp"
+                android:paddingBottom="20dp"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+    </RelativeLayout>
+
 </RelativeLayout>

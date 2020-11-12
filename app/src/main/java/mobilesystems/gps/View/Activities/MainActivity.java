@@ -26,6 +26,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import mobilesystems.gps.R;
 import mobilesystems.gps.View.Fragments.AboutView;
+import mobilesystems.gps.View.Fragments.AccountView;
 import mobilesystems.gps.View.Fragments.LoginView;
 import mobilesystems.gps.View.Fragments.ParkingView;
 import mobilesystems.gps.View.Fragments.PerksView;
@@ -106,6 +107,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragmentTransaction.commit();
                 break;
             case R.id.item_account:
+                AccountView accountView = new AccountView();
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.container_fragments, accountView);
+                fragmentTransaction.addToBackStack("LoginView");
+                fragmentTransaction.commit();
                 break;
             case R.id.item_about:
                 AboutView aboutView = new AboutView();
