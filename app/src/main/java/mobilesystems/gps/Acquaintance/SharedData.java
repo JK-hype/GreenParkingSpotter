@@ -28,6 +28,7 @@ public class SharedData {
         AppDatabase db = Room.databaseBuilder(c,
                 AppDatabase.class, "database-name").build();
         return db;
+    }
 
     public static void hideKeyboard(Context context, View view, Activity activity) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(activity.INPUT_METHOD_SERVICE);

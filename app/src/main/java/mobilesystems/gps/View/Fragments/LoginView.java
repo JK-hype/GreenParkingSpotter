@@ -39,8 +39,8 @@ public class LoginView extends Fragment {
         txt_password = view.findViewById(R.id.txt_password);
 
         // Locking the Navigation Drawer on the Login View
-        ((NavigationDrawerMenu)getActivity()).setDrawerLocked(true);
-        ((NavigationDrawerMenu)getActivity()).setToolbarVisibility(false);
+        ((NavigationDrawerMenu) getActivity()).setDrawerLocked(true);
+        ((NavigationDrawerMenu) getActivity()).setToolbarVisibility(false);
 
         return view;
     }
@@ -59,9 +59,10 @@ public class LoginView extends Fragment {
                     FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.container_fragments, parkingView);
                     fragmentTransaction.commit();
-		    ((NavigationDrawerMenu)getActivity()).setItemPark();
-                    ((NavigationDrawerMenu)getActivity()).setDrawerLocked(false);
-                    ((NavigationDrawerMenu)getActivity()).setToolbarVisibility(true);
+
+                    ((NavigationDrawerMenu) getActivity()).setItemPark();
+                    ((NavigationDrawerMenu) getActivity()).setDrawerLocked(false);
+                    ((NavigationDrawerMenu) getActivity()).setToolbarVisibility(true);
                 } else {
                     Toast.makeText(getContext(), status.second, Toast.LENGTH_SHORT).show();
                 }
@@ -79,10 +80,8 @@ public class LoginView extends Fragment {
                 } else {
                     Toast.makeText(getContext(), "You have not typed anything.", Toast.LENGTH_SHORT).show();
                 }
-
-
-                SharedData.hideKeyboard(getContext(), getView(), getActivity());
-        }
+                SharedData.getInstance().hideKeyboard(getContext(), getView(), getActivity());
+            }
         });
 
         btn_goToCreateAccount.setOnClickListener(new View.OnClickListener() {
@@ -90,18 +89,10 @@ public class LoginView extends Fragment {
             public void onClick(View v) {
                 CreateAccountView createAccountView = new CreateAccountView();
                 FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
-
                 fragmentTransaction.replace(R.id.mainFragment, createAccountView);
                 fragmentTransaction.addToBackStack("CreateAccountView");
                 fragmentTransaction.commit();
             }
         });
     }
-
-    /*@Nullable
-    @Override
-    public void onDestroyView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.login_view, container, false)
-    }*/
-
 }
