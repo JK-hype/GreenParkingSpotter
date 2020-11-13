@@ -1,7 +1,6 @@
 package mobilesystems.gps.View.Activities;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -9,24 +8,18 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import androidx.core.view.GravityCompat;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
 
-import android.content.ClipData;
-import android.graphics.Color;
+import androidx.core.view.GravityCompat;
+
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.navigation.NavigationView;
+
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import mobilesystems.gps.R;
@@ -49,7 +42,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.INTERNET}, PackageManager.PERMISSION_GRANTED);
+        checkPermissions();
+
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.INTERNET}, PackageManager.PERMISSION_GRANTED);
         loginVM = new ViewModelProvider(this).get(LoginViewModel.class);
 
         drawerLayout = findViewById(R.id.mainFragment);
@@ -74,13 +69,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    private void checkPermissions() {
+        if (this != null) {
+            if (ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+            }
+        }
+    }
+
     @Override
     public void onBackPressed() {
 
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        }
-        else {
+        } else {
             super.onBackPressed();
         }
     }
@@ -144,13 +149,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void setDrawerLocked(boolean enabled){
-        if(enabled){
+    public void setDrawerLocked(boolean enabled) {
+        if (enabled) {
             drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-        }else{
+        } else {
             drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         }
     }
+
     @Override
     public void setToolbarVisibility(boolean visible) {
         if (visible) {
@@ -159,6 +165,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             findViewById(R.id.toolbar_menu).setVisibility(View.INVISIBLE);
         }
     }
+
     @Override
     public void setItemPark() {
         navigationView.setCheckedItem(R.id.item_park);
