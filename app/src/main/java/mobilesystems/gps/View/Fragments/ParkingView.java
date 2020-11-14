@@ -85,8 +85,6 @@ public class ParkingView extends Fragment {
                 btn_park.startAnimation(animation);
                 btn_park.setText("PARKED");
 
-                //view_circle1.setBackgroundColor(0);
-
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override

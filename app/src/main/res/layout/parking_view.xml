@@ -58,58 +58,6 @@
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignBottom="@+id/layout_parkingButton"
-        android:layout_alignLeft="@+id/layout_parkingButton">
-
-        <View
-            android:id="@+id/view_circle1"
-            android:layout_height="20dp"
-            android:layout_width="20dp"
-            android:background="@drawable/circle" />
-        <View
-            android:id="@+id/view_circle2"
-            android:layout_height="20dp"
-            android:layout_width="20dp"
-            android:background="@drawable/circle"
-            android:translationX="20dp" />
-        <View
-            android:id="@+id/view_circle3"
-            android:layout_height="20dp"
-            android:layout_width="20dp"
-            android:background="@drawable/circle"
-            android:translationX="40dp" />
-        <View
-            android:id="@+id/view_circle4"
-            android:layout_height="20dp"
-            android:layout_width="20dp"
-            android:background="@drawable/circle"
-            android:translationX="60dp" />
-        <View
-            android:id="@+id/view_circle5"
-            android:layout_height="20dp"
-            android:layout_width="20dp"
-            android:background="@drawable/circle"
-            android:translationX="80dp" />
-        <View
-            android:id="@+id/view_circle6"
-            android:layout_height="20dp"
-            android:layout_width="20dp"
-            android:background="@drawable/circle"
-            android:translationX="100dp" />
-        <View
-            android:id="@+id/view_circle7"
-            android:layout_height="20dp"
-            android:layout_width="20dp"
-            android:background="@drawable/circle"
-            android:translationX="120dp" />
-
-
-    </LinearLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
