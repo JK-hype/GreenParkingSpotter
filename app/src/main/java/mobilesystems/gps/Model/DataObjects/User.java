@@ -5,6 +5,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import mobilesystems.gps.Acquaintance.CARTYPE;
 import mobilesystems.gps.Acquaintance.IUser;
 
 @Entity(tableName = "users")
@@ -21,7 +22,7 @@ public class User implements IUser {
     public String password;
 
     @ColumnInfo(name = "car_type")
-    public String car_type;
+    public CARTYPE car_type;
 
     @ColumnInfo(name = "car_brand")
     public String car_brand;
@@ -45,7 +46,7 @@ public class User implements IUser {
     }
 
     @Override
-    public String getCar_type() {
+    public CARTYPE getCar_type() {
         return car_type;
     }
 

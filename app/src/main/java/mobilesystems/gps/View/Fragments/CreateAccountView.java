@@ -20,6 +20,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import mobilesystems.gps.Acquaintance.CARTYPE;
 import mobilesystems.gps.Acquaintance.Common;
 import mobilesystems.gps.R;
 import mobilesystems.gps.ViewModel.CreateAccountViewModel;
@@ -32,12 +33,6 @@ public class CreateAccountView extends Fragment {
     RelativeLayout layout;
 
     Spinner spinner;
-    public enum enum_createCarType {
-        Gasoline,
-        Diesel,
-        Electric,
-        Hybrid
-    }
 
     @Nullable
     @Override
@@ -53,7 +48,7 @@ public class CreateAccountView extends Fragment {
         txt_createCarBrand = view.findViewById(R.id.txt_createCarBrand);
 
         spinner = view.findViewById(R.id.spinner_createCarType);
-        spinner.setAdapter(new ArrayAdapter<enum_createCarType>(getContext(), android.R.layout.simple_spinner_dropdown_item, enum_createCarType.values()));
+        spinner.setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, CARTYPE.values()));
 
         return view;
     }
@@ -81,8 +76,11 @@ public class CreateAccountView extends Fragment {
             public void onClick(View v) {
 //                VM.createAccount(txt_createStudentMail.getText().toString().trim(), txt_createPassword.getText().toString().trim(),
 //                                 txt_createCarType.getText().toString().trim(), txt_createCarBrand.getText().toString().trim(), getContext());
+                String selectedCarType = spinner.getSelectedItem().toString().trim();
+                CARTYPE cartype = CARTYPE.Diesel;
+
                 VM.createAccount(txt_createStudentMail.getText().toString().trim(), txt_createPassword.getText().toString().trim(),
-                        spinner.getSelectedItem().toString().trim(), txt_createCarBrand.getText().toString().trim(), getContext());
+                        cartype, txt_createCarBrand.getText().toString().trim(), getContext());
             }
         });
 
