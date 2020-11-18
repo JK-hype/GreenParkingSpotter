@@ -1,104 +1,70 @@
 package mobilesystems.gps.ViewModel;
 
-import android.app.Activity;
+import android.content.Context;
 import android.location.Location;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.google.android.gms.maps.model.LatLng;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import mobilesystems.gps.Acquaintance.Callback;
-import mobilesystems.gps.Model.Repository.MapColorService;
+import mobilesystems.gps.Acquaintance.IParkingLot;
 import mobilesystems.gps.Model.Repository.MapCoordinateService;
-import mobilesystems.gps.View.Fragments.MapView;
 
 public class MapViewModel extends ViewModel {
 
-    private static final String TAG = "MapViewModel";
-
     MapCoordinateService mapCoordinateService = new MapCoordinateService();
-    MapColorService mapColorService = new MapColorService();
+    MutableLiveData<IParkingLot> UserParkingLot;
+    MutableLiveData<List<IParkingLot>> coordinates;
 
-    MutableLiveData<Integer> index;
-    MutableLiveData<List<LatLng>> coordinates;
-    MutableLiveData<List<Boolean>> colorsOfSpot;
-    List<LatLng> listOfLatLng = new ArrayList<>();
-
-
-
-    public LiveData<List<LatLng>> fetchParkingLotsCoordinates() {
-        Log.i(TAG, "fetchCoordinates called");
+    public LiveData<List<IParkingLot>> fetchParkingLotsCoordinates(Context c) {
         if (coordinates == null) {
             coordinates = new MutableLiveData<>();
         }
-        fetchCoordinatesFromModel();
+        fetchCoordinatesFromModel(c);
         return coordinates;
     }
 
-    private void fetchCoordinatesFromModel() {
+    private void fetchCoordinatesFromModel(Context c) {
         mapCoordinateService.fetchCoordinates(new Callback() {
             @Override
             public void onResponse(Object o) {
-                if (coordinates == null) {
-                    coordinates = new MutableLiveData<>();
-                }
-                coordinates.postValue((List<LatLng>) o);
-                listOfLatLng = (List<LatLng>) o;
-                Log.i(TAG, "coordinates fetched");
+                coordinates.postValue((List<IParkingLot>) o);
             }
-        });
+        }, c);
     }
 
-    public LiveData<List<Boolean>> fetchColors() {
-        Log.i(TAG, "fetchColors called");
-        if (colorsOfSpot == null) {
-            colorsOfSpot = new MutableLiveData<>();
+    public void updateParkingLot(IParkingLot parkingLot, Context c) {
+        mapCoordinateService.updateParkingLot(parkingLot, c);
+    }
+
+    public LiveData<IParkingLot> getNearestMarker(Location location) {
+        if (UserParkingLot == null) {
+            UserParkingLot = new MutableLiveData<>();
         }
-        fetchColorsFromModel();
-        return colorsOfSpot;
+        calculateNearestMarker(location);
+        return UserParkingLot;
     }
 
-    private void fetchColorsFromModel() {
-        mapColorService.fetchColors(new Callback() {
-            @Override
-            public void onResponse(Object o) {
-                if (colorsOfSpot == null) {
-                    colorsOfSpot = new MutableLiveData<>();
-                }
-                colorsOfSpot.postValue((List<Boolean>) o);
-                Log.i(TAG, "colors fetched");
-            }
-        });
-    }
-
-    public LiveData<Integer> getNearestMarker(Location carLocation){
-        Log.i(TAG, "getNearestMarker called");
-
-
-        if(index == null){
-            index = new MutableLiveData<>();
-        }
-
-        float min = 10000;
+    private void calculateNearestMarker(Location location) {
+        float min = Float.MAX_VALUE;
         float[] results = new float[3];
+        IParkingLot returnParkingLot = null;
 
-        Log.i(TAG, "finding nearest marker");
-        for(int i = 0; i < listOfLatLng.size(); i++){
-            Location.distanceBetween(listOfLatLng.get(i).latitude, listOfLatLng.get(i).longitude,
-                    carLocation.getLatitude(), carLocation.getLongitude(),results);
-            if(results[0] < min) {
-                index.postValue(i);
+        for (IParkingLot parkingLot : coordinates.getValue()) {
+            Location.distanceBetween(parkingLot.getCoordinates().latitude,
+                    parkingLot.getCoordinates().longitude,
+                    location.getLatitude(),
+                    location.getLongitude(),
+                    results);
+            if (results[0] < min) {
                 min = results[0];
+                returnParkingLot = parkingLot;
             }
         }
-
-        return index;
+        UserParkingLot.postValue(returnParkingLot);
     }
 
 }
