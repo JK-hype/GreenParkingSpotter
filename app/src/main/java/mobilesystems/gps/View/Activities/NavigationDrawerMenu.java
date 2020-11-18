@@ -1,7 +1,13 @@
 package mobilesystems.gps.View.Activities;
 
-public interface NavigationDrawerMenu{
-    public void setDrawerLocked(boolean lock);
-    public void setToolbarVisibility(boolean visible);
-    public void setItemPark();
+import android.location.Location;
+
+public interface NavigationDrawerMenu {
+    void setDrawerLocked(boolean lock);
+
+    void setToolbarVisibility(boolean visible);
+
+    void setItemPark();
+
+    void setLocation(Location location);
 }

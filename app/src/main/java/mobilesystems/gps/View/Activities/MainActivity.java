@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
@@ -13,6 +14,7 @@ import androidx.core.view.GravityCompat;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,6 +39,7 @@ import mobilesystems.gps.R;
 import mobilesystems.gps.View.Fragments.AboutView;
 import mobilesystems.gps.View.Fragments.AccountView;
 import mobilesystems.gps.View.Fragments.LoginView;
+import mobilesystems.gps.View.Fragments.MapView;
 import mobilesystems.gps.View.Fragments.ParkingView;
 import mobilesystems.gps.View.Fragments.PerksView;
 import mobilesystems.gps.ViewModel.LoginViewModel;
@@ -47,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     Toolbar toolbar;
     LoginViewModel loginVM;
+    Location location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,10 +119,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragmentTransaction.commit();
                 break;
             case R.id.item_map:
-                LoginView loginView = new LoginView();
+                MapView mapView = new MapView();
+                if (location != null) {
+                    Bundle b = new Bundle();
+                    b.putParcelable("location", location);
+                    mapView.setArguments(b);
+                }
                 fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.container_fragments, loginView);
-                fragmentTransaction.addToBackStack("LoginView");
+                fragmentTransaction.replace(R.id.container_fragments, mapView);
+                fragmentTransaction.addToBackStack("ParkingView");
                 fragmentTransaction.commit();
                 break;
             case R.id.item_perks:
@@ -144,8 +153,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.item_logout:
                 loginVM.logout();
-
-                loginView = new LoginView();
+                LoginView loginView = new LoginView();
                 fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.container_fragments, loginView);
                 fragmentTransaction.addToBackStack("LoginView");
@@ -180,5 +188,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void setItemPark() {
         navigationView.setCheckedItem(R.id.item_park);
+    }
+
+    @Override
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }
