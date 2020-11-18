@@ -35,7 +35,6 @@ import mobilesystems.gps.R;
 
 public class ParkingView extends Fragment {
     Button btn_park, btn_leave;
-    View view_circle1, view_circle2, view_circle3, view_circle4, view_circle5, view_circle6, view_circle7;
     TextView current_lat, current_long;
     Boolean isParked;
     FusedLocationProviderClient fusedLocationProviderClient;
@@ -47,14 +46,6 @@ public class ParkingView extends Fragment {
 
         btn_park = view.findViewById(R.id.btn_park);
         btn_leave = view.findViewById(R.id.btn_leave);
-        view_circle1 = view.findViewById(R.id.view_circle1);
-        view_circle2 = view.findViewById(R.id.view_circle2);
-        view_circle3 = view.findViewById(R.id.view_circle3);
-        view_circle4 = view.findViewById(R.id.view_circle4);
-        view_circle5 = view.findViewById(R.id.view_circle5);
-        view_circle6 = view.findViewById(R.id.view_circle6);
-        view_circle7 = view.findViewById(R.id.view_circle7);
-
         current_lat = view.findViewById(R.id.txt_current_lat);
         current_long = view.findViewById(R.id.txt_current_long);
 
@@ -84,8 +75,6 @@ public class ParkingView extends Fragment {
                 //animation.setRepeatCount(Animation.INFINITE);
                 btn_park.startAnimation(animation);
                 btn_park.setText("PARKED");
-
-                //view_circle1.setBackgroundColor(0);
 
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
