@@ -3,12 +3,10 @@ package mobilesystems.gps.Model.DataObjects;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
 import com.google.android.gms.maps.model.LatLng;
 
 import mobilesystems.gps.Acquaintance.IParkingLot;
-import mobilesystems.gps.Acquaintance.IUser;
 
 @Entity(tableName = "parking_lots")
 public class ParkingLot implements IParkingLot {

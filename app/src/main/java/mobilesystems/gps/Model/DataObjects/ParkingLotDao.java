@@ -1,15 +1,11 @@
 package mobilesystems.gps.Model.DataObjects;
 
 import androidx.room.Dao;
-import androidx.room.Delete;
-import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
-
-import mobilesystems.gps.Acquaintance.IParkingLot;
 
 @Dao
 public interface ParkingLotDao {
