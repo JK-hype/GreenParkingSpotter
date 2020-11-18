@@ -16,19 +16,28 @@ import mobilesystems.gps.View.Fragments.LoginView;
 
 public class MainActivity extends AppCompatActivity {
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        checkPermission();
         if (savedInstanceState == null) {
             LoginView loginView = new LoginView();
             FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
 
             fragmentTransaction.replace(R.id.mainFragment, loginView);
             fragmentTransaction.commit();
+        }
+    }
+
+    private void checkPermission() {
+        if (this != null) {
+            if (ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+            }
         }
     }
 }

@@ -5,7 +5,7 @@ import mobilesystems.gps.Model.Adapters.CarAdapter;
 
 public class LoginService {
     public void login(final Callback callback, String username, String password) {
-        if(username.equals("test")  && password.equals("1234")) {
+        if(username.equals("T")  && password.equals("T")) {
             callback.onResponse(true);
         }else{
             callback.onResponse(false);

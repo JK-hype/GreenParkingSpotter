@@ -2,15 +2,15 @@ package mobilesystems.gps.View.Fragments;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,46 +31,41 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import mobilesystems.gps.R;
 import mobilesystems.gps.ViewModel.MapViewModel;
 
 public class MapView extends Fragment implements OnMapReadyCallback {
 
-    private static final LatLng LAT_LNG_1 = new LatLng( 55.367575, 10.431397 );
-    private static final LatLng LAT_LNG_2 = new LatLng( 55.368611, 10.432463 );
-    private static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(LAT_LNG_1, LAT_LNG_2);
+    private static final LatLng SDU_PARKING_COORDS1 = new LatLng(55.367575, 10.431397);
+    private static final LatLng SDU_PARKING_COORDS2 = new LatLng(55.368611, 10.432463);
+    private static final LatLngBounds SDU_PARKING_BOUNDS = new LatLngBounds(SDU_PARKING_COORDS1, SDU_PARKING_COORDS2);
     private static final int REQUEST_CODE = 101;
     private static final String TAG = "MapView";
     private int index = 1000;
     private boolean isFirstTime = true;
 
-    Button BtnUpdate;
     SupportMapFragment supportMapFragment;
     MapViewModel mapVM = new MapViewModel();
     Location carLocation;
     GoogleMap map;
-    FusedLocationProviderClient fusedLocationProviderClient;
-    Activity activity;
 
     List<Marker> markers = new ArrayList<>();
-    List<LatLng> coordinates = new ArrayList<>();
-
-    public MapView(Activity activity){
-        this.activity = activity;
-    }
+    List<LatLng> parkingLotsCoords = new ArrayList<>();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.i(TAG,"onCreateView called");
-        final View view = inflater.inflate(R.layout.map_view,container,false);
+        Log.i(TAG, "onCreateView called");
+        final View view = inflater.inflate(R.layout.map_view, container, false);
 
-        BtnUpdate = view.findViewById(R.id.btn_update);
         supportMapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.map);
 
         return view;
@@ -78,28 +73,23 @@ public class MapView extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        Log.i(TAG, "onViewCreated called");
         super.onViewCreated(view, savedInstanceState);
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
+
+        Bundle b = this.getArguments();
+
+        if (b != null) {
+            carLocation = (Location) b.getParcelable("location");
+        }
 
         supportMapFragment.getMapAsync(MapView.this);
-
-        BtnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fetchCarLocation();
-            }
-        });
-
         mapVM = new ViewModelProvider(requireActivity()).get(MapViewModel.class);
 
-
-        mapVM.fetchCoordinates().observe(requireActivity(), new Observer<List<LatLng>>() {
+        mapVM.fetchParkingLotsCoordinates().observe(requireActivity(), new Observer<List<LatLng>>() {
             @Override
             public void onChanged(List<LatLng> latLngs) {
                 Log.i(TAG, "change in fetchCoordinates");
-                coordinates = latLngs;
-                if(latLngs != null && isFirstTime) {
+                parkingLotsCoords = latLngs;
+                if (latLngs != null && isFirstTime) {
                     Log.i(TAG, "Map Async");
                     createMarkers(map);
                     isFirstTime = false;
@@ -116,63 +106,37 @@ public class MapView extends Fragment implements OnMapReadyCallback {
             }
         });
 
-        fetchCarLocation();
-
         mapVM.getNearestMarker(carLocation).observe(requireActivity(), new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
                 Log.i(TAG, "Change in getNearestMarker");
-                if(integer != null){
+                if (integer != null) {
                     index = integer;
                     markMySpot(map);
                 }
-
-            }
-        });
-
-    }
-
-    public void fetchCarLocation() {
-        Log.i(TAG, "fetchCarLocation called");
-
-        checkPermission();
-        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if(location != null){
-                    Log.i(TAG, "successfully get last location ");
-                    carLocation = location;
-                    mapVM.getNearestMarker(location);
-                }
             }
         });
     }
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         Log.i(TAG, "onMapReady called");
 
-        googleMap.setLatLngBoundsForCameraTarget(LAT_LNG_BOUNDS);
-        googleMap.getUiSettings().setZoomGesturesEnabled(false);
-        googleMap.getUiSettings().setRotateGesturesEnabled(false);
+        googleMap.setLatLngBoundsForCameraTarget(SDU_PARKING_BOUNDS);
 
         map = googleMap;
 
-        checkPermission();
-        googleMap.setMyLocationEnabled(true);
+        //googleMap.setMyLocationEnabled(true);
         Log.i(TAG, "MyLocation enabled");
-
-
     }
 
-    public void spotColor(List<Boolean> colorsOfSpot){
+    public void spotColor(List<Boolean> colorsOfSpot) {
         Log.i(TAG, "spotColor called");
-        for(int i = 0; i < colorsOfSpot.size(); i++){
-            if(i != index){
-                if(!colorsOfSpot.get(i)){
+        for (int i = 0; i < colorsOfSpot.size(); i++) {
+            if (i != index) {
+                if (!colorsOfSpot.get(i)) {
                     markers.get(i).setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-                }else{
+                } else {
                     markers.get(i).setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                 }
             }
@@ -180,41 +144,19 @@ public class MapView extends Fragment implements OnMapReadyCallback {
         Log.i(TAG, "spotColor set");
     }
 
-    public void createMarkers(GoogleMap googleMap){
+    public void createMarkers(GoogleMap googleMap) {
         Log.i(TAG, "createMarkers called");
-        for(LatLng latLng : coordinates){
-            MarkerOptions markerOptions = new MarkerOptions().position(latLng).icon(BitmapDescriptorFactory.
+        for (LatLng coords : parkingLotsCoords) {
+            MarkerOptions markerOptions = new MarkerOptions().position(coords).icon(BitmapDescriptorFactory.
                     defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
             markers.add(googleMap.addMarker(markerOptions));
         }
     }
 
-    public void markMySpot(GoogleMap googleMap){
+    public void markMySpot(GoogleMap googleMap) {
         Log.i(TAG, "markMySpot called");
-        LatLng latLng = new LatLng(markers.get(index).getPosition().latitude,markers.get(index).getPosition().longitude);
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,19.0f));
+        LatLng latLng = new LatLng(parkingLotsCoords.get(0).latitude, parkingLotsCoords.get(0).longitude);
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 19.0f));
         markers.get(index).setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
-    }
-
-    public void checkPermission(){
-        if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
-                (activity,Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_CODE);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        Log.d(TAG,"onRequestPermissionResult: checking permission results");
-        switch (requestCode){
-            case REQUEST_CODE:
-                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    break;
-                }else{
-                    Toast.makeText(getContext(), "Permission for location was not granted.", Toast.LENGTH_SHORT).show();
-                }
-                break;
-        }
     }
 }

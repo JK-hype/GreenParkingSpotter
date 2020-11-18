@@ -32,7 +32,7 @@ public class MapViewModel extends ViewModel {
 
 
 
-    public LiveData<List<LatLng>> fetchCoordinates() {
+    public LiveData<List<LatLng>> fetchParkingLotsCoordinates() {
         Log.i(TAG, "fetchCoordinates called");
         if (coordinates == null) {
             coordinates = new MutableLiveData<>();
