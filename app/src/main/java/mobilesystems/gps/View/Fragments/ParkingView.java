@@ -10,9 +10,12 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -20,6 +23,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -93,26 +98,9 @@ public class ParkingView extends Fragment {
                 }, 5000); // Change to 1 minute? (60000)
             }
         });
-    }
 
-    private void getLocation() {
-        checkPermission();
-        fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+        btn_leave.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onComplete(@NonNull Task<Location> task) {
-                Location location = task.getResult();
-                if (location != null) {
-                    MapView mapView = new MapView();
-                    Bundle b = new Bundle();
-                    b.putParcelable("location", location);
-                    mapView.setArguments(b);
-
-                    FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.mainFragment, mapView);
-                    fragmentTransaction.addToBackStack("Parking View");
-                    fragmentTransaction.commit();
-                }
-
             public void onClick(View v) {
                 isParked = false;
                 updateLocation();
@@ -137,6 +125,38 @@ public class ParkingView extends Fragment {
         });
     }
 
+    private void getLocation() {
+        checkPermission();
+        fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+            @Override
+            public void onComplete(@NonNull Task<Location> task) {
+                Location location = task.getResult();
+                if (location != null) {
+                    try {
+                        Geocoder geocoder = new Geocoder(getContext(),
+                                Locale.getDefault());
+                        List<Address> addressList = geocoder.getFromLocation(
+                                location.getLatitude(), location.getLongitude(), 1
+                        );
+                        current_lat.setText(String.valueOf(addressList.get(0).getLatitude()));
+                        current_long.setText(String.valueOf(addressList.get(0).getLongitude()));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    MapView mapView = new MapView();
+                    Bundle b = new Bundle();
+                    b.putParcelable("location", location);
+                    mapView.setArguments(b);
+
+                    FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.container_fragments, mapView);
+                    fragmentTransaction.addToBackStack("Parking View");
+                    fragmentTransaction.commit();
+                }
+            }
+        });
+    }
 
     private void updateLocation() {
         if (getActivity() != null) {
@@ -157,7 +177,6 @@ public class ParkingView extends Fragment {
         }
     }
 
-
     private void checkPermission() {
         if (getContext() != null && getActivity() != null) {
             if (ActivityCompat.checkSelfPermission(getContext(),
@@ -167,29 +186,5 @@ public class ParkingView extends Fragment {
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
             }
         }
-    }
-
-
-    private void getLocation() {
-        checkPermission();
-        fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
-            @Override
-            public void onComplete(@NonNull Task<Location> task) {
-                Location location = task.getResult();
-                if (location != null) {
-                    try {
-                        Geocoder geocoder = new Geocoder(getContext(),
-                                Locale.getDefault());
-                        List<Address> addressList = geocoder.getFromLocation(
-                                location.getLatitude(), location.getLongitude(), 1
-                        );
-                        current_lat.setText(String.valueOf(addressList.get(0).getLatitude()));
-                        current_long.setText(String.valueOf(addressList.get(0).getLongitude()));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
     }
 }
