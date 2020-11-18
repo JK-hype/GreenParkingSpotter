@@ -4,7 +4,7 @@ public interface IUser {
     int getUid();
     String getStudent_mail();
     String getPassword();
-    String getCar_type();
+    enum getCar_type();
     String getCar_brand();
     int getCoins();
     boolean payCoins(int coins);
