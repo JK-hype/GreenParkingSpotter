@@ -2,6 +2,7 @@ package mobilesystems.gps.View.Activities;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolbar = findViewById(R.id.toolbar_menu);
 
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
 
         // Navigation Drawer Menu
         navigationView.setNavigationItemSelectedListener(this);
