@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
@@ -16,7 +17,11 @@
 
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_key"/>
-        <activity android:name="mobilesystems.gps.View.Activities.MainActivity">
+
+        <activity
+            android:name="mobilesystems.gps.View.Activities.MainActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

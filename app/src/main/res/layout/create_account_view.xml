@@ -1,67 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="mobilesystems.gps.View.Activities.MainActivity">
 
-    <LinearLayout
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:text="NEW ACCOUNT"
+        android:textColor="@color/colorPrimary"
+        android:textSize="50dp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:layout_marginHorizontal="20dp"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="Create Account"
-            android:textSize="50dp" />
-
         <EditText
-            android:layout_width="wrap_content"
+            android:id="@+id/txt_createStudentMail"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:hint="Username"
+            android:layout_marginHorizontal="5dp"
+            android:hint="Student mail"
             android:minWidth="200dp" />
 
         <EditText
-            android:layout_width="wrap_content"
+            android:id="@+id/txt_createPassword"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginHorizontal="5dp"
             android:hint="Password"
             android:minWidth="200dp" />
 
         <EditText
-            android:layout_width="wrap_content"
+            android:id="@+id/txt_createCarType"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:hint="Email"
-            android:minWidth="200dp" />
-
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_marginHorizontal="5dp"
             android:hint="Car type"
             android:minWidth="200dp" />
 
         <EditText
-            android:layout_width="wrap_content"
+            android:id="@+id/txt_createCarBrand"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginHorizontal="5dp"
             android:hint="Car brand"
             android:minWidth="200dp" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:id="@+id/btn_create_account"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="5dp"
-            android:background="@android:color/holo_red_light"
+            android:background="@color/colorPrimary"
             android:paddingHorizontal="5dp"
-            android:text="Create account"
-            android:id="@+id/btn_create_account"/>
+            android:text="CREATE ACCOUNT"
+            android:textColor="#FFF"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_return"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@android:color/darker_gray"
+            android:text="return to login"
+            android:textColor="#FFF"
+            android:textSize="20dp"
+            android:textStyle="bold" />
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                android:text="GREEN PARKING SPOTTER"
+                android:textColor="#FFF"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingBottom="20dp"
+                android:text="Create a new account"
+                android:textColor="#FFF"
+                android:textSize="12dp" />
+        </LinearLayout>
+    </RelativeLayout>
+
 </RelativeLayout>

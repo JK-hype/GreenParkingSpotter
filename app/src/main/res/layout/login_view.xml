@@ -1,59 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="mobilesystems.gps.View.Activities.MainActivity">
 
-    <LinearLayout
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:text="LOGIN"
+        android:textColor="@color/colorPrimary"
+        android:textSize="50dp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:layout_marginHorizontal="20dp"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/txt_studentMail"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="Login"
-            android:textSize="50dp" />
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="5dp"
+            android:hint="Student mail"
+            android:minWidth="200dp" />
 
         <EditText
-            android:layout_width="wrap_content"
+            android:id="@+id/txt_password"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Username"
-            android:minWidth="200dp"
-            android:id="@+id/txt_username"/>
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="5dp"
             android:hint="Password"
-            android:minWidth="200dp"
-            android:id="@+id/txt_password"/>
+            android:inputType="textPassword"
+            android:minWidth="200dp" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:background="@color/colorPrimary"
+            android:text="LOGIN"
+            android:textColor="#FFF"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_goToCreateAccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:background="@android:color/darker_gray"
+            android:paddingHorizontal="5dp"
+            android:text="CREATE ACCOUNT"
+            android:textColor="#FFF"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
 
-            <Button
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                android:text="GREEN PARKING SPOTTER"
+                android:textColor="#FFF"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="5dp"
-                android:background="@android:color/holo_green_light"
-                android:text="Login"
-                android:id="@+id/btn_login"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="5dp"
-                android:paddingHorizontal="5dp"
-                android:background="@android:color/holo_red_light"
-                android:text="Create user"
-                android:id="@+id/btn_goToCreateAccount"/>
+                android:paddingBottom="20dp"
+                android:text="Login or create an account"
+                android:textColor="#FFF"
+                android:textSize="12dp" />
         </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
+
 </RelativeLayout>

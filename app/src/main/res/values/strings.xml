@@ -1,4 +1,6 @@
 <resources>
-    <string name="app_name">GreenParkingSpotter</string>
     <string name="map_key" translatable="false"> AIzaSyD5LjvmoQ8D1wMkmnh_juUi1P8HyUuvtXs </string>
+    <string name="app_name">GPS</string>
+    <string name="navigationDrawerOpen">Open Navigation Drawer</string>
+    <string name="navigationDrawerClose">Close Navigation Drawer</string>
 </resources>
