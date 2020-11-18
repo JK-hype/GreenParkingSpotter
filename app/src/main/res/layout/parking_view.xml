@@ -27,57 +27,31 @@
 
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/layout_parkingButton"
-        android:layout_centerVertical="true">
-        <Button
-            android:id="@+id/btn_park"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_centerInParent="true"
-            android:background="@drawable/btn_park"
-            android:text="PARK"
-            android:textColor="#FFF"
-            android:textSize="30dp" />
+    <Button
+        android:id="@+id/btn_park"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/btn_park"
+        android:text="PARK"
+        android:textColor="#FFF"
+        android:textSize="30dp" />
 
-        <Button
-            android:id="@+id/btn_leave"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_centerInParent="true"
-            android:background="@drawable/btn_leave"
-            android:text="LEAVE"
-            android:textColor="#FFF"
-            android:textSize="30dp" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/btn_park"
-            android:orientation="horizontal">
-
-            <View
-                android:layout_height="20dp"
-                android:layout_width="20dp"
-                android:background="@drawable/circle"/>
-            <View
-                android:layout_height="20dp"
-                android:layout_width="20dp"
-                android:background="@drawable/circle"
-                android:translationX="20dp"
-                android:translationY="-20dp"/>
-
-        </LinearLayout>
-
-    </RelativeLayout>
+    <Button
+        android:id="@+id/btn_leave"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/btn_leave"
+        android:text="LEAVE"
+        android:textColor="#FFF"
+        android:textSize="30dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/bottom"
-        android:layout_below="@id/layout_parkingButton"
+        android:layout_below="@id/btn_park"
         android:gravity="center">
 
         <TextView
