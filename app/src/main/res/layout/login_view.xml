@@ -13,7 +13,7 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:text="LOGIN"
-        android:textColor="@android:color/holo_red_light"
+        android:textColor="@color/colorPrimary"
         android:textSize="50dp"
         android:textStyle="bold" />
 
@@ -29,6 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginHorizontal="5dp"
             android:hint="Student mail"
             android:minWidth="200dp" />
 
@@ -37,6 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginHorizontal="5dp"
             android:hint="Password"
             android:inputType="textPassword"
             android:minWidth="200dp" />
@@ -47,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="5dp"
-            android:background="@android:color/holo_green_light"
+            android:background="@color/colorPrimary"
             android:text="LOGIN"
             android:textColor="#FFF"
             android:textSize="20dp"
@@ -59,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="5dp"
-            android:background="@android:color/holo_red_light"
+            android:background="@android:color/darker_gray"
             android:paddingHorizontal="5dp"
             android:text="CREATE ACCOUNT"
             android:textColor="#FFF"
@@ -71,7 +73,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@android:color/holo_red_light"
+        android:background="@color/colorPrimaryDark"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -94,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:paddingBottom="20dp"
-                android:text="Login og create an account"
+                android:text="Login or create an account"
                 android:textColor="#FFF"
                 android:textSize="12dp" />
         </LinearLayout>

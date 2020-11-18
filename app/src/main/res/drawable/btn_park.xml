@@ -55,7 +55,7 @@
         <shape>
             <corners
                 android:radius="200dp"/>
-            <solid android:color="#98FB98"></solid>
+            <solid android:color="@color/colorPrimary"></solid>
         </shape>
     </item>
 </layer-list>

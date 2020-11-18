@@ -12,7 +12,7 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:text="NEW ACCOUNT"
-        android:textColor="@android:color/holo_red_light"
+        android:textColor="@color/colorPrimary"
         android:textSize="50dp"
         android:textStyle="bold" />
 
@@ -25,33 +25,37 @@
 
         <EditText
             android:id="@+id/txt_createStudentMail"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginHorizontal="5dp"
             android:hint="Student mail"
             android:minWidth="200dp" />
 
         <EditText
             android:id="@+id/txt_createPassword"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginHorizontal="5dp"
             android:hint="Password"
             android:minWidth="200dp" />
 
         <EditText
             android:id="@+id/txt_createCarType"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginHorizontal="5dp"
             android:hint="Car type"
             android:minWidth="200dp" />
 
         <EditText
             android:id="@+id/txt_createCarBrand"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginHorizontal="5dp"
             android:hint="Car brand"
             android:minWidth="200dp" />
 
@@ -61,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="5dp"
-            android:background="@android:color/holo_red_light"
+            android:background="@color/colorPrimary"
             android:paddingHorizontal="5dp"
             android:text="CREATE ACCOUNT"
             android:textColor="#FFF"
@@ -70,14 +74,13 @@
 
         <Button
             android:id="@+id/btn_return"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_margin="5dp"
             android:background="@android:color/darker_gray"
-            android:paddingHorizontal="20dp"
             android:text="return to login"
             android:textColor="#FFF"
-            android:textSize="16dp"
+            android:textSize="20dp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -85,7 +88,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@android:color/holo_red_light"
+        android:background="@color/colorPrimaryDark"
         android:orientation="horizontal">
 
         <LinearLayout
