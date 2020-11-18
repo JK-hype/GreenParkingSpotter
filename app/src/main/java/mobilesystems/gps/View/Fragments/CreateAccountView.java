@@ -54,7 +54,6 @@ public class CreateAccountView extends Fragment {
 
         spinner = view.findViewById(R.id.spinner_createCarType);
         spinner.setAdapter(new ArrayAdapter<enum_createCarType>(getContext(), android.R.layout.simple_spinner_dropdown_item, enum_createCarType.values()));
-        //enum_createCarType =
 
         return view;
     }
