@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GreenParkingSpotter</string>
+    <string name="map_key" translatable="false"> AIzaSyD5LjvmoQ8D1wMkmnh_juUi1P8HyUuvtXs </string>
 </resources>

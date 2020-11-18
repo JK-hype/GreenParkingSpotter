@@ -1,75 +1,94 @@
 package mobilesystems.gps.ViewModel;
 
+import android.app.Activity;
 import android.location.Location;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import mobilesystems.gps.Acquaintance.Callback;
-import mobilesystems.gps.Model.Repository.MapService;
+import mobilesystems.gps.Model.Repository.MapColorService;
+import mobilesystems.gps.Model.Repository.MapCoordinateService;
+import mobilesystems.gps.View.Fragments.MapView;
 
-public class MapViewModel extends ViewModel{
+public class MapViewModel extends ViewModel {
 
-    Location location;
-    FusedLocationProviderClient fusedLocationProviderClient;
-    MapService mapService;
-    Location carLocation;
+    private static final String TAG = "MapViewModel";
+
+    MapCoordinateService mapCoordinateService = new MapCoordinateService();
+    MapColorService mapColorService = new MapColorService();
 
     MutableLiveData<Integer> index;
     MutableLiveData<List<LatLng>> coordinates;
+    MutableLiveData<List<Boolean>> colorsOfSpot;
     List<LatLng> listOfLatLng = new ArrayList<>();
 
-    public LiveData<List<LatLng>> fetchCoordinates(){
-        if(coordinates == null){
+
+
+    public LiveData<List<LatLng>> fetchCoordinates() {
+        Log.i(TAG, "fetchCoordinates called");
+        if (coordinates == null) {
             coordinates = new MutableLiveData<>();
         }
         fetchCoordinatesFromModel();
         return coordinates;
     }
 
-    private void fetchCoordinatesFromModel(){
-        mapService.fetchCoordinates(new Callback() {
+    private void fetchCoordinatesFromModel() {
+        mapCoordinateService.fetchCoordinates(new Callback() {
             @Override
             public void onResponse(Object o) {
-                if(coordinates == null){
+                if (coordinates == null) {
                     coordinates = new MutableLiveData<>();
                 }
                 coordinates.postValue((List<LatLng>) o);
                 listOfLatLng = (List<LatLng>) o;
+                Log.i(TAG, "coordinates fetched");
             }
         });
     }
 
-    public void fetchCarLocation() {
+    public LiveData<List<Boolean>> fetchColors() {
+        Log.i(TAG, "fetchColors called");
+        if (colorsOfSpot == null) {
+            colorsOfSpot = new MutableLiveData<>();
+        }
+        fetchColorsFromModel();
+        return colorsOfSpot;
+    }
 
-        Task<Location> task = fusedLocationProviderClient.getLastLocation();
-        task.addOnSuccessListener(new OnSuccessListener<Location>() {
+    private void fetchColorsFromModel() {
+        mapColorService.fetchColors(new Callback() {
             @Override
-            public void onSuccess(Location location) {
-                if (location != null){
-                    carLocation = location;
-                    getNearestMarker();
+            public void onResponse(Object o) {
+                if (colorsOfSpot == null) {
+                    colorsOfSpot = new MutableLiveData<>();
                 }
+                colorsOfSpot.postValue((List<Boolean>) o);
+                Log.i(TAG, "colors fetched");
             }
         });
     }
 
-    public LiveData<Integer> getNearestMarker(){
+    public LiveData<Integer> getNearestMarker(Location carLocation){
+        Log.i(TAG, "getNearestMarker called");
+
+
         if(index == null){
             index = new MutableLiveData<>();
         }
 
         float min = 10000;
         float[] results = new float[3];
+
+        Log.i(TAG, "finding nearest marker");
         for(int i = 0; i < listOfLatLng.size(); i++){
             Location.distanceBetween(listOfLatLng.get(i).latitude, listOfLatLng.get(i).longitude,
                     carLocation.getLatitude(), carLocation.getLongitude(),results);
@@ -78,6 +97,8 @@ public class MapViewModel extends ViewModel{
                 min = results[0];
             }
         }
+
         return index;
     }
+
 }

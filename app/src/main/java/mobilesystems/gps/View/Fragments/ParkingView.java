@@ -9,6 +9,8 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import mobilesystems.gps.R;
 
@@ -32,7 +34,12 @@ public class ParkingView extends Fragment {
         btn_park.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Test");
+                MapView mapView = new MapView(getActivity());
+                FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
+
+                fragmentTransaction.replace(R.id.mainFragment, mapView);
+                fragmentTransaction.addToBackStack("Parking View");
+                fragmentTransaction.commit();
             }
         });
     }

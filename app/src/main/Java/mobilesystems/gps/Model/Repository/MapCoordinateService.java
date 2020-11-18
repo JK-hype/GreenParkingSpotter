@@ -7,7 +7,7 @@ import java.util.List;
 
 import mobilesystems.gps.Acquaintance.Callback;
 
-public class MapService {
+public class MapCoordinateService {
     LatLng latLng1 = new LatLng(55.367575, 10.431397);
     LatLng latLng2 = new LatLng(55.367675, 10.431497);
     LatLng latLng3 = new LatLng(55.367775, 10.431597);
