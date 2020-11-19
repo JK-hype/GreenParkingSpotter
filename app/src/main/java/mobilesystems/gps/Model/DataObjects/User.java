@@ -1,5 +1,7 @@
 package mobilesystems.gps.Model.DataObjects;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -7,9 +9,12 @@ import androidx.room.PrimaryKey;
 
 import mobilesystems.gps.Acquaintance.CARTYPE;
 import mobilesystems.gps.Acquaintance.IUser;
+import mobilesystems.gps.Acquaintance.SessionData;
+import mobilesystems.gps.Model.Repository.AccountService;
 
 @Entity(tableName = "users")
 public class User implements IUser {
+
     @PrimaryKey
     public int uid;
 
@@ -61,11 +66,20 @@ public class User implements IUser {
     }
 
     @Override
-    public boolean payCoins(int coins) {
+    public boolean payCoins(int coins, Context c) {
         if (this.coins - coins < 0) {
             return false;
         }
         this.coins -= coins;
+        AccountService accountService = new AccountService();
+        accountService.updateUser(this, c);
         return true;
+    }
+
+    @Override
+    public void gainCoins(int coins, Context c) {
+        this.coins += coins;
+        AccountService accountService = new AccountService();
+        accountService.updateUser(this, c);
     }
 }

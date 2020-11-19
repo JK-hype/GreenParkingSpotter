@@ -41,6 +41,8 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import mobilesystems.gps.Acquaintance.CARTYPE;
+import mobilesystems.gps.Acquaintance.IUser;
 import mobilesystems.gps.Acquaintance.SessionData;
 import mobilesystems.gps.R;
 import mobilesystems.gps.View.Activities.NavigationDrawerMenu;
@@ -78,6 +80,14 @@ public class ParkingView extends Fragment {
             @Override
             public void onClick(View v) {
                 updateLocation();
+
+                IUser user = SessionData.getInstance().getCurrentUser();
+                String userCarType = user.getCar_type();
+                if (userCarType.equals(CARTYPE.Electric.toString()) || userCarType.equals(CARTYPE.Hybrid.toString())) {
+                    user.gainCoins(10, getContext());
+                } else {
+                    user.gainCoins(2, getContext());
+                }
 
                 Animation animation = new AlphaAnimation(0.0f, 1.0f);
                 animation.setDuration(500); //You can manage the blinking time with this parameter

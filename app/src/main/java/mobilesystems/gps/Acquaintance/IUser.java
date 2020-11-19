@@ -1,5 +1,7 @@
 package mobilesystems.gps.Acquaintance;
 
+import android.content.Context;
+
 public interface IUser {
     int getUid();
     String getStudent_mail();
@@ -7,5 +9,6 @@ public interface IUser {
     String getCar_type();
     String getCar_brand();
     int getCoins();
-    boolean payCoins(int coins);
+    boolean payCoins(int coins, Context c);
+    void gainCoins(int coins, Context c);
 }

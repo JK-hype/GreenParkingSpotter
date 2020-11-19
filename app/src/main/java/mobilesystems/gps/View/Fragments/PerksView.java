@@ -47,7 +47,7 @@ public class PerksView extends Fragment {
         btn_redeem1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (user.payCoins(PerkPrice.LOW.getPrice())) {
+                if (user.payCoins(PerkPrice.LOW.getPrice(), getContext())) {
                     Toast.makeText(getContext(), "Discount redeemed!", Toast.LENGTH_SHORT).show();
                     txt_discount1.setVisibility(View.GONE);
                     btn_redeem1.setVisibility(View.GONE);
@@ -61,7 +61,7 @@ public class PerksView extends Fragment {
         btn_redeem2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (user.payCoins(PerkPrice.MEDIUM.getPrice())) {
+                if (user.payCoins(PerkPrice.MEDIUM.getPrice(), getContext())) {
                     Toast.makeText(getContext(), "Discount redeemed!", Toast.LENGTH_SHORT).show();
                     txt_discount2.setVisibility(View.GONE);
                     btn_redeem2.setVisibility(View.GONE);
@@ -75,7 +75,7 @@ public class PerksView extends Fragment {
         btn_redeem3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (user.payCoins(PerkPrice.HIGH.getPrice())) {
+                if (user.payCoins(PerkPrice.HIGH.getPrice(), getContext())) {
                     Toast.makeText(getContext(), "Discount redeemed!", Toast.LENGTH_SHORT).show();
                     txt_discount3.setVisibility(View.GONE);
                     btn_redeem3.setVisibility(View.GONE);
