@@ -4,9 +4,13 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Pair;
 
+import java.util.List;
+
 import mobilesystems.gps.Acquaintance.Callback;
 import mobilesystems.gps.Acquaintance.SessionData;
 import mobilesystems.gps.Acquaintance.Common;
+import mobilesystems.gps.Model.DataObjects.ParkingLot;
+import mobilesystems.gps.Model.DataObjects.ParkingLotDao;
 import mobilesystems.gps.Model.DataObjects.User;
 import mobilesystems.gps.Model.DataObjects.UserDao;
 
@@ -15,6 +19,8 @@ public class LoginService {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
+                verifyDatabaseInformation(c);
+
                 UserDao userDao = Common.getInstance().getDatabase(c).userDao();
                 User user = userDao.getUserByMail(mail);
                 if (user == null || !user.student_mail.equals(mail)) {
@@ -34,5 +40,22 @@ public class LoginService {
                 return null;
             }
         }.execute();
+    }
+
+    private void verifyDatabaseInformation(Context c) {
+        ParkingLotDao parkingLotDao = Common.getInstance().getDatabase(c).parkingLotDao();
+        List<ParkingLot> parkingLots = parkingLotDao.getParkingLots();
+        if (parkingLots.isEmpty()) {
+            parkingLotDao.insertAll(createParkingLots());
+        }
+    }
+
+    private static ParkingLot[] createParkingLots() {
+        return new ParkingLot[] {
+                new ParkingLot(55.367575, 10.431397, true),
+                new ParkingLot(55.367675, 10.431497, true),
+                new ParkingLot(55.367775, 10.431597, true),
+                new ParkingLot(55.367875, 10.431697, true)
+        };
     }
 }

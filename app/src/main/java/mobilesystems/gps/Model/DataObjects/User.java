@@ -16,7 +16,7 @@ import mobilesystems.gps.Model.Repository.AccountService;
 public class User implements IUser {
 
     @PrimaryKey
-    public int uid;
+    public Integer uid;
 
     @ColumnInfo(name = "student_mail")
     @NonNull

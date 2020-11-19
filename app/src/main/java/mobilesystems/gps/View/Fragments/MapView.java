@@ -76,7 +76,9 @@ public class MapView extends Fragment implements OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState);
 
         supportMapFragment.getMapAsync(MapView.this);
+    }
 
+    private void setMapRequiredObservers() {
         mapVM.fetchParkingLotsCoordinates(getContext()).observe(requireActivity(), new Observer<List<IParkingLot>>() {
             @Override
             public void onChanged(List<IParkingLot> parkingLots) {
@@ -134,6 +136,8 @@ public class MapView extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         googleMap.setLatLngBoundsForCameraTarget(SDU_PARKING_BOUNDS);
         map = googleMap;
+
+        setMapRequiredObservers();
 
         checkPermission();
         googleMap.setMyLocationEnabled(true);

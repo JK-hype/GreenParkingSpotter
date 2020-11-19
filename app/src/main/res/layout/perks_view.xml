@@ -100,7 +100,7 @@
                 android:layout_toStartOf="@+id/btn_redeem3"
                 android:background="@drawable/textview_style"
                 android:padding="10dp"
-                android:text="2 for 1 cakes price"
+                android:text="Skip an assignment"
                 android:textSize="20dp" />
 
             <Button

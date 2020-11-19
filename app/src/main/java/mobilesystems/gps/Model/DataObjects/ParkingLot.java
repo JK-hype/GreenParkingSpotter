@@ -12,7 +12,7 @@ import mobilesystems.gps.Acquaintance.IParkingLot;
 @Entity(tableName = "parking_lots")
 public class ParkingLot implements IParkingLot {
     @PrimaryKey
-    public int uid;
+    public Integer uid;
 
     @ColumnInfo(name = "latitude")
     @NonNull

@@ -19,20 +19,14 @@ import mobilesystems.gps.Model.DataObjects.User;
 import mobilesystems.gps.Model.DataObjects.UserDao;
 
 public class MapCoordinateService {
-    List<IParkingLot> tempList = new ArrayList<>();
 
     public void fetchCoordinates(final Callback callback, final Context c) {
-        tempList.add(new ParkingLot(55.367575, 10.431397, true));
-        tempList.add(new ParkingLot(55.367675, 10.431497, true));
-        tempList.add(new ParkingLot(55.367775, 10.431597, true));
-        tempList.add(new ParkingLot(55.367875, 10.431697, true));
-
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
                 ParkingLotDao parkingLotDao = Common.getInstance().getDatabase(c).parkingLotDao();
                 List<ParkingLot> parkingLots = parkingLotDao.getParkingLots();
-                callback.onResponse(tempList);
+                callback.onResponse(parkingLots);
                 return null;
             }
         }.execute();
