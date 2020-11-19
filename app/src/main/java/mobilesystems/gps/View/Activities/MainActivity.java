@@ -15,9 +15,12 @@ import androidx.core.view.GravityCompat;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -67,8 +70,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolbar = findViewById(R.id.toolbar_menu);
 
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
 
-        //LoginView
         // Navigation Drawer Menu
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.bringToFront();

@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import mobilesystems.gps.Acquaintance.CARTYPE;
 import mobilesystems.gps.Acquaintance.Callback;
 import mobilesystems.gps.Model.Repository.CreateAccountService;
 

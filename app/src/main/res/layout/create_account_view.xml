@@ -41,14 +41,16 @@
             android:hint="Password"
             android:minWidth="200dp" />
 
-        <EditText
-            android:id="@+id/txt_createCarType"
+        <Spinner
+            android:id="@+id/spinner_createCarType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginHorizontal="5dp"
             android:hint="Car type"
-            android:minWidth="200dp" />
+            android:minWidth="200dp"
+            android:spinnerMode="dropdown"
+            style="@style/Widget.AppCompat.Spinner.Underlined"/>
 
         <EditText
             android:id="@+id/txt_createCarBrand"

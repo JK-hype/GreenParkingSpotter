@@ -5,6 +5,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import mobilesystems.gps.Acquaintance.CARTYPE;
 import mobilesystems.gps.Acquaintance.IUser;
 
 @Entity(tableName = "users")

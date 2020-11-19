@@ -3,6 +3,7 @@ package mobilesystems.gps.Model.Repository;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import mobilesystems.gps.Acquaintance.CARTYPE;
 import mobilesystems.gps.Acquaintance.Callback;
 import mobilesystems.gps.Acquaintance.Common;
 import mobilesystems.gps.Model.DataObjects.User;
