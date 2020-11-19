@@ -22,7 +22,7 @@ public class CreateAccountViewModel extends ViewModel {
         return createAccountStatus;
     }
 
-    public void createAccount(String mail, String password, CARTYPE carType, String carBrand, Context c) {
+    public void createAccount(String mail, String password, String carType, String carBrand, Context c) {
         createAccountService.createAccount(new Callback() {
             @Override
             public void onResponse(Object o) {

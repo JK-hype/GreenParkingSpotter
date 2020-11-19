@@ -24,15 +24,13 @@ import mobilesystems.gps.Acquaintance.CARTYPE;
 import mobilesystems.gps.Acquaintance.Common;
 import mobilesystems.gps.R;
 import mobilesystems.gps.ViewModel.CreateAccountViewModel;
-import mobilesystems.gps.ViewModel.LoginViewModel;
 
 public class CreateAccountView extends Fragment {
     CreateAccountViewModel VM;
     Button btn_create_account, btn_return;
-    EditText txt_createStudentMail, txt_createPassword, txt_createCarType, txt_createCarBrand;
+    EditText txt_createStudentMail, txt_createPassword, txt_createCarBrand;
     RelativeLayout layout;
-
-    Spinner spinner;
+    Spinner spinner_carType;
 
     @Nullable
     @Override
@@ -44,11 +42,12 @@ public class CreateAccountView extends Fragment {
         btn_return = view.findViewById(R.id.btn_return);
         txt_createStudentMail = view.findViewById(R.id.txt_createStudentMail);
         txt_createPassword = view.findViewById(R.id.txt_createPassword);
-        //txt_createCarType = view.findViewById(R.id.txt_createCarType);
         txt_createCarBrand = view.findViewById(R.id.txt_createCarBrand);
 
-        spinner = view.findViewById(R.id.spinner_createCarType);
-        spinner.setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, CARTYPE.values()));
+        spinner_carType = view.findViewById(R.id.spinner_createCarType);
+        ArrayAdapter<CARTYPE> arrayAdapter = new ArrayAdapter<>(getContext(), R.layout.spinner_text, CARTYPE.values());
+        arrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown_style);
+        spinner_carType.setAdapter(arrayAdapter);
 
         return view;
     }
@@ -65,7 +64,7 @@ public class CreateAccountView extends Fragment {
                 Common.getInstance().hideKeyboard(getContext(), v, getActivity());
                 txt_createStudentMail.clearFocus();
                 txt_createPassword.clearFocus();
-                //txt_createCarType.clearFocus();
+                spinner_carType.clearFocus();
                 txt_createCarBrand.clearFocus();
                 return false;
             }
@@ -74,13 +73,33 @@ public class CreateAccountView extends Fragment {
         btn_create_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                VM.createAccount(txt_createStudentMail.getText().toString().trim(), txt_createPassword.getText().toString().trim(),
-//                                 txt_createCarType.getText().toString().trim(), txt_createCarBrand.getText().toString().trim(), getContext());
-                String selectedCarType = spinner.getSelectedItem().toString().trim();
-                CARTYPE cartype = CARTYPE.Diesel;
+                String selectedCarType = spinner_carType.getSelectedItem().toString().trim();
+                CARTYPE cartype = CARTYPE.None;
+                switch (selectedCarType) {
+                    case "None":
+                        cartype = CARTYPE.None;
+                        break;
+                    case "Electric":
+                        cartype = CARTYPE.Electric;
+                        break;
+                    case "Hybrid":
+                        cartype = CARTYPE.Hybrid;
+                        break;
+                    case "Gasoline":
+                        cartype = CARTYPE.Gasoline;
+                        break;
+                    case "Diesel":
+                        cartype = CARTYPE.Diesel;
+                        break;
+                    case "Other":
+                        cartype = CARTYPE.Other;
+                        break;
+                    default:
+                        break;
+                }
 
                 VM.createAccount(txt_createStudentMail.getText().toString().trim(), txt_createPassword.getText().toString().trim(),
-                        cartype, txt_createCarBrand.getText().toString().trim(), getContext());
+                        cartype.toString().trim(), txt_createCarBrand.getText().toString().trim(), getContext());
             }
         });
 

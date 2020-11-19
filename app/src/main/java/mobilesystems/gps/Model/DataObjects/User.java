@@ -22,7 +22,7 @@ public class User implements IUser {
     public String password;
 
     @ColumnInfo(name = "car_type")
-    public CARTYPE car_type;
+    public String car_type;
 
     @ColumnInfo(name = "car_brand")
     public String car_brand;
@@ -46,7 +46,7 @@ public class User implements IUser {
     }
 
     @Override
-    public CARTYPE getCar_type() {
+    public String getCar_type() {
         return car_type;
     }
 

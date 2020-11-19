@@ -11,7 +11,7 @@ import mobilesystems.gps.Model.DataObjects.UserDao;
 
 public class CreateAccountService {
 
-    public void createAccount(final Callback callback, final String mail, final String password, final CARTYPE carType, final String carBrand, final Context c) {
+    public void createAccount(final Callback callback, final String mail, final String password, final String carType, final String carBrand, final Context c) {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
