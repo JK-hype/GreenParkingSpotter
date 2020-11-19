@@ -35,6 +35,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.navigation.NavigationView;
 
+import mobilesystems.gps.Acquaintance.SessionData;
 import mobilesystems.gps.R;
 import mobilesystems.gps.View.Fragments.AboutView;
 import mobilesystems.gps.View.Fragments.AccountView;
@@ -43,6 +44,7 @@ import mobilesystems.gps.View.Fragments.MapView;
 import mobilesystems.gps.View.Fragments.ParkingView;
 import mobilesystems.gps.View.Fragments.PerksView;
 import mobilesystems.gps.ViewModel.LoginViewModel;
+import mobilesystems.gps.ViewModel.MapViewModel;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, NavigationDrawerMenu {
 
@@ -50,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     Toolbar toolbar;
     LoginViewModel loginVM;
-    Location location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (savedInstanceState == null) {
             LoginView loginView = new LoginView();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.container_fragments, loginView); // <-- THIS IS WORKING! I used container_fragments instead of the mainFragment
+            fragmentTransaction.replace(R.id.container_fragments, loginView);
             fragmentTransaction.commit();
         }
     }
@@ -120,11 +121,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.item_map:
                 MapView mapView = new MapView();
-                if (location != null) {
-                    Bundle b = new Bundle();
-                    b.putParcelable("location", location);
-                    mapView.setArguments(b);
-                }
                 fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.container_fragments, mapView);
                 fragmentTransaction.addToBackStack("ParkingView");
@@ -188,10 +184,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void setItemPark() {
         navigationView.setCheckedItem(R.id.item_park);
-    }
-
-    @Override
-    public void setLocation(Location location) {
-        this.location = location;
     }
 }

@@ -40,6 +40,7 @@ import java.util.List;
 import java.util.Locale;
 
 import mobilesystems.gps.Acquaintance.IParkingLot;
+import mobilesystems.gps.Acquaintance.SessionData;
 import mobilesystems.gps.R;
 import mobilesystems.gps.ViewModel.LoginViewModel;
 import mobilesystems.gps.ViewModel.MapViewModel;
@@ -52,11 +53,10 @@ public class MapView extends Fragment implements OnMapReadyCallback {
 
     SupportMapFragment supportMapFragment;
     MapViewModel mapVM;
-    Location carLocation;
     GoogleMap map;
 
     List<LatLng> savedParkingLots;
-    List<MarkerOptions> markers;
+    List<Marker> markers;
 
     @Nullable
     @Override
@@ -75,14 +75,7 @@ public class MapView extends Fragment implements OnMapReadyCallback {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Bundle b = this.getArguments();
-
-        if (b != null) {
-            carLocation = (Location) b.getParcelable("location");
-        }
-
         supportMapFragment.getMapAsync(MapView.this);
-        mapVM = new ViewModelProvider(requireActivity()).get(MapViewModel.class);
 
         mapVM.fetchParkingLotsCoordinates(getContext()).observe(requireActivity(), new Observer<List<IParkingLot>>() {
             @Override
@@ -102,15 +95,14 @@ public class MapView extends Fragment implements OnMapReadyCallback {
 
                         MarkerOptions markerOptions = new MarkerOptions().position(parkingLotCoords).icon(BitmapDescriptorFactory.
                                 defaultMarker(color));
-                        map.addMarker(markerOptions);
-                        markers.add(markerOptions);
+                        markers.add(map.addMarker(markerOptions));
                     } else if (savedParkingLots.contains(parkingLotCoords)) {
-                        for (MarkerOptions marker : markers) {
+                        for (Marker marker : markers) {
                             if (marker.getPosition().equals(parkingLotCoords)) {
                                 if (parkingLot.getAvailability()) {
-                                    marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                                    marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                                 } else {
-                                    marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                                    marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                                 }
                             }
                         }
@@ -119,15 +111,16 @@ public class MapView extends Fragment implements OnMapReadyCallback {
             }
         });
 
-        mapVM.getNearestMarker(carLocation).observe(requireActivity(), new Observer<IParkingLot>() {
+        mapVM.getLocationParked().observe(requireActivity(), new Observer<Location>() {
             @Override
-            public void onChanged(IParkingLot parkingLot) {
+            public void onChanged(Location location) {
+                IParkingLot parkingLot = mapVM.calculateNearestMarker(location);
                 if (parkingLot != null) {
                     LatLng coordinates = new LatLng(parkingLot.getlatitude(), parkingLot.getlongitude());
                     map.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 19.0f));
-                    for (MarkerOptions marker : markers) {
+                    for (Marker marker : markers) {
                         if (marker.getPosition().equals(coordinates)) {
-                            marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                            marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
                             parkingLot.setAvailability(false);
                             mapVM.updateParkingLot(parkingLot, getContext());
                         }
@@ -144,6 +137,10 @@ public class MapView extends Fragment implements OnMapReadyCallback {
 
         checkPermission();
         googleMap.setMyLocationEnabled(true);
+
+        if (SessionData.getInstance().getLocation() != null) {
+            mapVM.setLocationParked(SessionData.getInstance().getLocation());
+        }
     }
 
     private void checkPermission() {

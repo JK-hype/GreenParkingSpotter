@@ -25,6 +25,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -40,8 +41,10 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import mobilesystems.gps.Acquaintance.SessionData;
 import mobilesystems.gps.R;
 import mobilesystems.gps.View.Activities.NavigationDrawerMenu;
+import mobilesystems.gps.ViewModel.MapViewModel;
 
 public class ParkingView extends Fragment {
 
@@ -99,6 +102,10 @@ public class ParkingView extends Fragment {
         btn_leave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SessionData.getInstance().setLocation(null);
+                current_lat.setText("");
+                current_long.setText("");
+
                 Animation animation = new AlphaAnimation(0.0f, 1.0f);
                 animation.setDuration(500); //You can manage the blinking time with this parameter
                 animation.setStartOffset(20);
@@ -128,7 +135,7 @@ public class ParkingView extends Fragment {
                 Location location = task.getResult();
                 if (location != null) {
                     try {
-                        ((NavigationDrawerMenu) getActivity()).setLocation(location);
+                        SessionData.getInstance().setLocation(location);
                         Geocoder geocoder = new Geocoder(getContext(),
                                 Locale.getDefault());
                         List<Address> addressList = geocoder.getFromLocation(

@@ -16,8 +16,8 @@ import mobilesystems.gps.Model.Repository.MapCoordinateService;
 public class MapViewModel extends ViewModel {
 
     MapCoordinateService mapCoordinateService = new MapCoordinateService();
-    MutableLiveData<IParkingLot> UserParkingLot;
     MutableLiveData<List<IParkingLot>> coordinates;
+    MutableLiveData<Location> locationParked;
 
     public LiveData<List<IParkingLot>> fetchParkingLotsCoordinates(Context c) {
         if (coordinates == null) {
@@ -40,21 +40,27 @@ public class MapViewModel extends ViewModel {
         mapCoordinateService.updateParkingLot(parkingLot, c);
     }
 
-    public LiveData<IParkingLot> getNearestMarker(Location location) {
-        if (UserParkingLot == null) {
-            UserParkingLot = new MutableLiveData<>();
+    public LiveData<Location> getLocationParked() {
+        if (locationParked == null) {
+            locationParked = new MutableLiveData<>();
         }
-        calculateNearestMarker(location);
-        return UserParkingLot;
+        return locationParked;
     }
 
-    private void calculateNearestMarker(Location location) {
+    public void setLocationParked(Location location) {
+        if (locationParked == null) {
+            locationParked = new MutableLiveData<>();
+        }
+        locationParked.postValue(location);
+    }
+
+    public IParkingLot calculateNearestMarker(Location location) {
         float min = Float.MAX_VALUE;
         float[] results = new float[3];
         IParkingLot returnParkingLot = null;
 
         if (coordinates.getValue() == null) {
-            return;
+            return null;
         }
 
         for (IParkingLot parkingLot : coordinates.getValue()) {
@@ -68,7 +74,7 @@ public class MapViewModel extends ViewModel {
                 returnParkingLot = parkingLot;
             }
         }
-        UserParkingLot.postValue(returnParkingLot);
+        return returnParkingLot;
     }
 
 }
