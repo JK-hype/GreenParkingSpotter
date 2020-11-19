@@ -8,6 +8,4 @@ public interface NavigationDrawerMenu {
     void setToolbarVisibility(boolean visible);
 
     void setItemPark();
-
-    void setLocation(Location location);
 }
