@@ -41,6 +41,7 @@ import java.util.Locale;
 
 import mobilesystems.gps.Acquaintance.IParkingLot;
 import mobilesystems.gps.R;
+import mobilesystems.gps.ViewModel.LoginViewModel;
 import mobilesystems.gps.ViewModel.MapViewModel;
 
 public class MapView extends Fragment implements OnMapReadyCallback {
@@ -48,27 +49,24 @@ public class MapView extends Fragment implements OnMapReadyCallback {
     private static final LatLng SDU_PARKING_COORDS1 = new LatLng(55.367575, 10.431397);
     private static final LatLng SDU_PARKING_COORDS2 = new LatLng(55.368611, 10.432463);
     private static final LatLngBounds SDU_PARKING_BOUNDS = new LatLngBounds(SDU_PARKING_COORDS1, SDU_PARKING_COORDS2);
-    private static final int REQUEST_CODE = 101;
-    private static final String TAG = "MapView";
-    private boolean isFirstTime = true;
 
     SupportMapFragment supportMapFragment;
-    MapViewModel mapVM = new MapViewModel();
+    MapViewModel mapVM;
     Location carLocation;
     GoogleMap map;
 
     List<LatLng> savedParkingLots;
-    List<Marker> markers;
+    List<MarkerOptions> markers;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.i(TAG, "onCreateView called");
         final View view = inflater.inflate(R.layout.map_view, container, false);
 
         supportMapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.map);
         savedParkingLots = new ArrayList<>();
         markers = new ArrayList<>();
+        mapVM = new ViewModelProvider(requireActivity()).get(MapViewModel.class);
 
         return view;
     }
@@ -104,14 +102,15 @@ public class MapView extends Fragment implements OnMapReadyCallback {
 
                         MarkerOptions markerOptions = new MarkerOptions().position(parkingLotCoords).icon(BitmapDescriptorFactory.
                                 defaultMarker(color));
-                        markers.add(map.addMarker(markerOptions));
+                        map.addMarker(markerOptions);
+                        markers.add(markerOptions);
                     } else if (savedParkingLots.contains(parkingLotCoords)) {
-                        for (Marker marker : markers) {
+                        for (MarkerOptions marker : markers) {
                             if (marker.getPosition().equals(parkingLotCoords)) {
                                 if (parkingLot.getAvailability()) {
-                                    marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                                    marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                                 } else {
-                                    marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                                    marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                                 }
                             }
                         }
@@ -126,9 +125,9 @@ public class MapView extends Fragment implements OnMapReadyCallback {
                 if (parkingLot != null) {
                     LatLng coordinates = new LatLng(parkingLot.getlatitude(), parkingLot.getlongitude());
                     map.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 19.0f));
-                    for (Marker marker : markers) {
+                    for (MarkerOptions marker : markers) {
                         if (marker.getPosition().equals(coordinates)) {
-                            marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                            marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
                             parkingLot.setAvailability(false);
                             mapVM.updateParkingLot(parkingLot, getContext());
                         }

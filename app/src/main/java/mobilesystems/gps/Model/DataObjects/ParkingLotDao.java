@@ -1,6 +1,7 @@
 package mobilesystems.gps.Model.DataObjects;
 
 import androidx.room.Dao;
+import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -17,4 +18,7 @@ public interface ParkingLotDao {
 
     @Query("UPDATE parking_lots SET availability=:availability WHERE latitude=:latitude AND longitude=:longitude")
     void updateParkingLot(boolean availability, double latitude, double longitude);
+
+    @Insert
+    void insertAll(ParkingLot... parkingLots);
 }

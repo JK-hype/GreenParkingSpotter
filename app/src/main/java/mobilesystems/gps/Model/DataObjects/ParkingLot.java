@@ -26,6 +26,12 @@ public class ParkingLot implements IParkingLot {
     @NonNull
     public boolean availability;
 
+    public ParkingLot(double latitude, double longitude, boolean availability) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.availability = availability;
+    }
+
     @Override
     public double getlatitude() {
         return latitude;
