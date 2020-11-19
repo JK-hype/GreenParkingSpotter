@@ -43,7 +43,7 @@ public class MapCoordinateService {
             @Override
             protected Void doInBackground(Void... params) {
                 ParkingLotDao parkingLotDao = Common.getInstance().getDatabase(c).parkingLotDao();
-                parkingLotDao.updateParkingLot(parkingLot.getAvailability(), parkingLot.getCoordinates());
+                parkingLotDao.updateParkingLot(parkingLot.getAvailability(), parkingLot.getlatitude(), parkingLot.getlongitude());
                 return null;
             }
         }.execute();

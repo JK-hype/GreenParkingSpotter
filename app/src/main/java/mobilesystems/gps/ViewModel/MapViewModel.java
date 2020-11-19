@@ -53,9 +53,13 @@ public class MapViewModel extends ViewModel {
         float[] results = new float[3];
         IParkingLot returnParkingLot = null;
 
+        if (coordinates.getValue() == null) {
+            return;
+        }
+
         for (IParkingLot parkingLot : coordinates.getValue()) {
-            Location.distanceBetween(parkingLot.getCoordinates().latitude,
-                    parkingLot.getCoordinates().longitude,
+            Location.distanceBetween(parkingLot.getlatitude(),
+                    parkingLot.getlongitude(),
                     location.getLatitude(),
                     location.getLongitude(),
                     results);

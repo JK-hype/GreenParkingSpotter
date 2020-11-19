@@ -90,8 +90,10 @@ public class MapView extends Fragment implements OnMapReadyCallback {
             @Override
             public void onChanged(List<IParkingLot> parkingLots) {
                 for (IParkingLot parkingLot : parkingLots) {
-                    if (!savedParkingLots.contains(parkingLot.getCoordinates())) {
-                        savedParkingLots.add(parkingLot.getCoordinates());
+                    LatLng parkingLotCoords = new LatLng(parkingLot.getlatitude(), parkingLot.getlongitude());
+
+                    if (!savedParkingLots.contains(parkingLotCoords)) {
+                        savedParkingLots.add(parkingLotCoords);
 
                         Float color;
                         if (parkingLot.getAvailability()) {
@@ -100,12 +102,12 @@ public class MapView extends Fragment implements OnMapReadyCallback {
                             color = BitmapDescriptorFactory.HUE_RED;
                         }
 
-                        MarkerOptions markerOptions = new MarkerOptions().position(parkingLot.getCoordinates()).icon(BitmapDescriptorFactory.
+                        MarkerOptions markerOptions = new MarkerOptions().position(parkingLotCoords).icon(BitmapDescriptorFactory.
                                 defaultMarker(color));
                         markers.add(map.addMarker(markerOptions));
-                    } else if (savedParkingLots.contains(parkingLot.getCoordinates())) {
+                    } else if (savedParkingLots.contains(parkingLotCoords)) {
                         for (Marker marker : markers) {
-                            if (marker.getPosition().equals(parkingLot.getCoordinates())) {
+                            if (marker.getPosition().equals(parkingLotCoords)) {
                                 if (parkingLot.getAvailability()) {
                                     marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                                 } else {
@@ -122,9 +124,10 @@ public class MapView extends Fragment implements OnMapReadyCallback {
             @Override
             public void onChanged(IParkingLot parkingLot) {
                 if (parkingLot != null) {
-                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(parkingLot.getCoordinates(), 19.0f));
+                    LatLng coordinates = new LatLng(parkingLot.getlatitude(), parkingLot.getlongitude());
+                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 19.0f));
                     for (Marker marker : markers) {
-                        if (marker.getPosition().equals(parkingLot.getCoordinates())) {
+                        if (marker.getPosition().equals(coordinates)) {
                             marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
                             parkingLot.setAvailability(false);
                             mapVM.updateParkingLot(parkingLot, getContext());
