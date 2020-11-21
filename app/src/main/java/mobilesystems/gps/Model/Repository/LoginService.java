@@ -102,7 +102,7 @@ public class LoginService {
                 new ParkingLot(55.368474, 10.431672,true),
                 new ParkingLot(55.368476, 10.431713,true),
                 new ParkingLot(55.368478, 10.431748,true),
-                new ParkingLot(55.468480, 10.431787,true),
+                new ParkingLot(55.368480, 10.431787,true),
                 new ParkingLot(55.368481, 10.431825,true),
                 new ParkingLot(55.368483, 10.431863,true),
                 new ParkingLot(55.368484, 10.431901,true),
