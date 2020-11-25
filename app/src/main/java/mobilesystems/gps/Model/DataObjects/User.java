@@ -1,18 +1,23 @@
 package mobilesystems.gps.Model.DataObjects;
 
 import android.content.Context;
+import android.location.Location;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
+
+import com.google.android.gms.maps.model.LatLng;
 
 import mobilesystems.gps.Acquaintance.CARTYPE;
 import mobilesystems.gps.Acquaintance.IUser;
 import mobilesystems.gps.Acquaintance.SessionData;
 import mobilesystems.gps.Model.Repository.AccountService;
+import mobilesystems.gps.Model.Repository.UserService;
 
-@Entity(tableName = "users")
+@Entity(tableName = "users", indices = {@Index(value = "student_mail", unique = true)})
 public class User implements IUser {
 
     @PrimaryKey
@@ -34,6 +39,15 @@ public class User implements IUser {
 
     @ColumnInfo(name = "coins")
     public int coins;
+
+    @ColumnInfo(name = "parked_status")
+    public boolean parked_status;
+
+    @ColumnInfo(name = "current_lat")
+    public double current_lat;
+
+    @ColumnInfo(name = "current_long")
+    public double current_long;
 
     @Override
     public int getUid() {
@@ -81,5 +95,30 @@ public class User implements IUser {
         this.coins += coins;
         AccountService accountService = new AccountService();
         accountService.updateUser(this, c);
+    }
+
+    @Override
+    public boolean getParkedStatus() {
+        return parked_status;
+    }
+
+    @Override
+    public void setParkedStatus(boolean parkedStatus, Context c) {
+        parked_status = parkedStatus;
+        UserService userService = new UserService();
+        userService.updateUser(this, c);
+    }
+
+    @Override
+    public LatLng getLocation() {
+        return new LatLng(current_lat, current_long);
+    }
+
+    @Override
+    public void setLocation(Location location, Context c) {
+        current_lat = location.getLatitude();
+        current_long = location.getLongitude();
+        UserService userService = new UserService();
+        userService.updateUser(this, c);
     }
 }

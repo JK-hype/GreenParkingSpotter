@@ -14,6 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="50dp"
             android:text="PARKING"
             android:textColor="@color/colorPrimary"
             android:textSize="50dp"
@@ -27,31 +28,37 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_park"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_centerInParent="true"
-        android:background="@drawable/btn_park"
-        android:text="PARK"
-        android:textColor="#FFF"
-        android:textSize="30dp" />
 
-    <Button
-        android:id="@+id/btn_leave"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_centerInParent="true"
-        android:background="@drawable/btn_leave"
-        android:text="LEAVE"
-        android:textColor="#FFF"
-        android:textSize="30dp" />
+    <RelativeLayout
+        android:id="@+id/parking_buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <Button
+            android:id="@+id/btn_park"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:background="@drawable/btn_park"
+            android:text="PARK"
+            android:textColor="#FFF"
+            android:textSize="30dp" />
+
+        <Button
+            android:id="@+id/btn_leave"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:background="@drawable/btn_leave"
+            android:text="LEAVE"
+            android:textColor="#FFF"
+            android:textSize="30dp" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/bottom"
-        android:layout_below="@id/btn_park"
+        android:layout_below="@id/parking_buttons"
         android:gravity="center">
 
         <TextView

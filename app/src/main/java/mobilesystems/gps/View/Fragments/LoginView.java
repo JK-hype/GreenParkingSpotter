@@ -58,8 +58,14 @@ public class LoginView extends Fragment {
             @Override
             public void onChanged(Pair<Boolean, String> status) {
                 if (status.first) {
-                    ParkingView parkingView = new ParkingView();
+                    MapView mapView = new MapView();
                     FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.container_fragments, mapView);
+                    fragmentTransaction.addToBackStack("ParkingView");
+                    fragmentTransaction.commit();
+
+                    ParkingView parkingView = new ParkingView();
+                    fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.container_fragments, parkingView);
                     fragmentTransaction.commit();
 

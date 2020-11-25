@@ -16,22 +16,22 @@ import mobilesystems.gps.Model.Repository.MapCoordinateService;
 public class MapViewModel extends ViewModel {
 
     MapCoordinateService mapCoordinateService = new MapCoordinateService();
-    MutableLiveData<List<IParkingLot>> coordinates;
+    MutableLiveData<List<IParkingLot>> allParkingLots;
     MutableLiveData<Location> locationParked;
 
     public LiveData<List<IParkingLot>> fetchParkingLotsCoordinates(Context c) {
-        if (coordinates == null) {
-            coordinates = new MutableLiveData<>();
+        if (allParkingLots == null) {
+            allParkingLots = new MutableLiveData<>();
         }
         fetchCoordinatesFromModel(c);
-        return coordinates;
+        return allParkingLots;
     }
 
     private void fetchCoordinatesFromModel(Context c) {
         mapCoordinateService.fetchCoordinates(new Callback() {
             @Override
             public void onResponse(Object o) {
-                coordinates.postValue((List<IParkingLot>) o);
+                allParkingLots.postValue((List<IParkingLot>) o);
             }
         }, c);
     }
@@ -55,15 +55,19 @@ public class MapViewModel extends ViewModel {
     }
 
     public IParkingLot calculateNearestMarker(Location location) {
+        if (location == null) {
+            return null;
+        }
+
+        if (allParkingLots.getValue() == null) {
+            return null;
+        }
+
         float min = Float.MAX_VALUE;
         float[] results = new float[3];
         IParkingLot returnParkingLot = null;
 
-        if (coordinates.getValue() == null) {
-            return null;
-        }
-
-        for (IParkingLot parkingLot : coordinates.getValue()) {
+        for (IParkingLot parkingLot : allParkingLots.getValue()) {
             Location.distanceBetween(parkingLot.getlatitude(),
                     parkingLot.getlongitude(),
                     location.getLatitude(),

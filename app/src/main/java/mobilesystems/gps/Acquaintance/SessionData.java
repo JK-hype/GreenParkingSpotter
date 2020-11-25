@@ -6,6 +6,7 @@ public class SessionData {
     private static SessionData instance;
     private IUser currentUser;
     private Location location;
+    private IParkingLot parkingLot;
 
     private SessionData() {}
 
@@ -28,5 +29,19 @@ public class SessionData {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public void setCurrentParkingLot(IParkingLot parkingLot) {
+        this.parkingLot = parkingLot;
+    }
+
+    public IParkingLot getParkingLot() {
+        return parkingLot;
+    }
+
+    public void resetData() {
+        currentUser = null;
+        location = null;
+        parkingLot = null;
     }
 }

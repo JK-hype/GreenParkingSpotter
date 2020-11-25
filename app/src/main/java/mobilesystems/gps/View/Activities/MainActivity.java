@@ -151,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragmentTransaction.commit();
                 break;
             case R.id.item_logout:
+                SessionData.getInstance().resetData();
                 loginVM.logout();
                 LoginView loginView = new LoginView();
                 fragmentTransaction = getSupportFragmentManager().beginTransaction();

@@ -24,7 +24,7 @@ public class CreateAccountService {
 
                 UserDao userDao = Common.getInstance().getDatabase(c).userDao();
                 User existingUser = userDao.getUserByMail(mail);
-                if (existingUser == null || existingUser != user) {
+                if (existingUser == null || !existingUser.student_mail.equals(mail)) {
                     userDao.insert(user);
                     callback.onResponse(true);
                 } else {

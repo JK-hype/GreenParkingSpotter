@@ -1,6 +1,8 @@
 package mobilesystems.gps.View.Fragments;
 
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -98,6 +100,11 @@ public class CreateAccountView extends Fragment {
                         break;
                 }
 
+                if (!isValidEmail(txt_createStudentMail.getText().toString().trim())) {
+                    Toast.makeText(getContext(), "Invalid email", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 VM.createAccount(txt_createStudentMail.getText().toString().trim(), txt_createPassword.getText().toString().trim(),
                         cartype.toString().trim(), txt_createCarBrand.getText().toString().trim(), getContext());
             }
@@ -124,10 +131,15 @@ public class CreateAccountView extends Fragment {
                     fragmentTransaction.replace(R.id.container_fragments, loginView);
                     fragmentTransaction.addToBackStack("LoginView");
                     fragmentTransaction.commit();
+                    VM.resetData();
                 } else {
                     Toast.makeText(getContext(), "Something went wrong. Try again", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    public static boolean isValidEmail(CharSequence target) {
+        return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
     }
 }

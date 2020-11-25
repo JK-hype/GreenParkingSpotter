@@ -40,6 +40,7 @@ import java.util.List;
 import java.util.Locale;
 
 import mobilesystems.gps.Acquaintance.IParkingLot;
+import mobilesystems.gps.Acquaintance.IUser;
 import mobilesystems.gps.Acquaintance.SessionData;
 import mobilesystems.gps.R;
 import mobilesystems.gps.ViewModel.LoginViewModel;
@@ -82,6 +83,7 @@ public class MapView extends Fragment implements OnMapReadyCallback {
         mapVM.fetchParkingLotsCoordinates(getContext()).observe(requireActivity(), new Observer<List<IParkingLot>>() {
             @Override
             public void onChanged(List<IParkingLot> parkingLots) {
+                IUser user = SessionData.getInstance().getCurrentUser();
                 for (IParkingLot parkingLot : parkingLots) {
                     LatLng parkingLotCoords = new LatLng(parkingLot.getlatitude(), parkingLot.getlongitude());
 
@@ -104,7 +106,11 @@ public class MapView extends Fragment implements OnMapReadyCallback {
                                 if (parkingLot.getAvailability()) {
                                     marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                                 } else {
-                                    marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                                    if (parkingLotCoords == user.getLocation()) {
+                                        marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                                    } else {
+                                        marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                                    }
                                 }
                             }
                         }
@@ -124,6 +130,7 @@ public class MapView extends Fragment implements OnMapReadyCallback {
                         if (marker.getPosition().equals(coordinates)) {
                             marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
                             parkingLot.setAvailability(false);
+                            SessionData.getInstance().setCurrentParkingLot(parkingLot);
                             mapVM.updateParkingLot(parkingLot, getContext());
                         }
                     }

@@ -14,6 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="50dp"
             android:text="ABOUT"
             android:textColor="@color/colorPrimary"
             android:textSize="50dp"
@@ -55,8 +56,8 @@
                 android:id="@+id/txt_version_nr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_below="@id/txt_version"
+                android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
                 android:text="v1.0" />
         </RelativeLayout>

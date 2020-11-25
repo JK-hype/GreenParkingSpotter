@@ -18,6 +18,9 @@ public interface UserDao {
     @Query("UPDATE users SET coins=:coins WHERE uid=:uid")
     void updateUser(int coins, int uid);
 
+    @Query("UPDATE users SET parked_status=:parked_status, current_lat=:latitude, current_long=:longitude WHERE uid=:uid")
+    void updateUserLocation(boolean parked_status, double latitude, double longitude, int uid);
+
     @Insert
     void insert(User user);
 

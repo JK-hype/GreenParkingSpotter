@@ -30,4 +30,8 @@ public class CreateAccountViewModel extends ViewModel {
             }
         },mail,password, carType, carBrand, c);
     }
+
+    public void resetData() {
+        createAccountStatus = null;
+    }
 }
