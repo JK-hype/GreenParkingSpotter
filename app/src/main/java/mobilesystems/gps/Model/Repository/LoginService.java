@@ -52,10 +52,6 @@ public class LoginService {
 
     private static ParkingLot[] createParkingLots() {
         return new ParkingLot[] {
-                new ParkingLot(55.367575, 10.431397, true),
-                new ParkingLot(55.367675, 10.431497, true),
-                new ParkingLot(55.367775, 10.431597, true),
-                new ParkingLot(55.367875, 10.431697, true),
                 // 1st row
                 new ParkingLot(55.368092, 10.431376, true),
                 new ParkingLot(55.368094, 10.431411,true),
